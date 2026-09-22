@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shop editor — B's Southern Creations</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="icon" href="../assets/favicon.png" type="image/png" />
+</head>
+<body>
+  <div class="login" data-screen="login">
+    <img src="../assets/mark.png" alt="" width="72" height="72" />
+    <h1>B's Southern Creations</h1>
+    <p>Shop editor</p>
+    <form class="card" data-login>
+      <label>
+        Password
+        <input type="password" name="password" autocomplete="current-password" required />
+      </label>
+      <button class="btn" type="submit">Log in</button>
+      <p class="error" data-login-error hidden>That password doesn’t match.</p>
+    </form>
+  </div>
+
+  <div class="editor" data-screen="editor" hidden>
+    <header class="bar">
+      <div class="bar-brand">
+        <img src="../assets/mark.png" alt="" width="36" height="36" />
+        <span>Shop editor</span>
+      </div>
+      <div class="bar-actions">
+        <a class="btn btn-ghost" href="../index.html">View site</a>
+        <button class="btn" type="button" data-save>Save changes</button>
+        <button class="btn btn-ghost" type="button" data-logout>Log out</button>
+      </div>
+    </header>
+    <p class="status" data-status hidden></p>
+
+    <form class="wrap" data-editor>
+      <section>
+        <h2>Hero</h2>
+        <label>Headline <input name="hero.headline" /></label>
+        <label>Intro <textarea name="hero.lede" rows="3"></textarea></label>
+        <label>Left button <input name="hero.primaryCta" /></label>
+        <label>Right button <input name="hero.secondaryCta" /></label>
+      </section>
+
+      <section>
+        <h2>Shop heading</h2>
+        <label>Small label <input name="shop.eyebrow" /></label>
+        <label>Title <input name="shop.title" /></label>
+        <label>Intro <textarea name="shop.lede" rows="3"></textarea></label>
+      </section>
+
+      <section data-product-fields>
+        <h2>Products</h2>
+        <p class="hint">Paste a Stripe/Square buy link when you have one. Leave blank to send people to Say hello.</p>
+      </section>
+
+      <section>
+        <h2>Custom orders</h2>
+        <label>Small label <input name="custom.eyebrow" /></label>
+        <label>Title <input name="custom.title" /></label>
+        <label>Story <textarea name="custom.text" rows="4"></textarea></label>
+        <label>Button <input name="custom.cta" /></label>
+      </section>
+
+      <section>
+        <h2>Say hello</h2>
+        <label>Small label <input name="contact.eyebrow" /></label>
+        <label>Title <input name="contact.title" /></label>
+        <label>Intro <textarea name="contact.lede" rows="3"></textarea></label>
+        <label>Box hint <input name="contact.placeholder" /></label>
+        <label>Thanks message <input name="contact.thanks" /></label>
+      </section>
+
+      <section>
+        <h2>Footer</h2>
+        <label>Tagline <input name="footer.tagline" /></label>
+      </section>
+
+      <section>
+        <h2>Connection (one-time)</h2>
+        <p class="hint">This lets Save update the live site. Paste the GitHub key Maria creates for this shop, then save.</p>
+        <label>
+          GitHub key
+          <input type="password" name="githubToken" autocomplete="off" data-token />
+        </label>
+      </section>
+    </form>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

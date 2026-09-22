@@ -1,0 +1,4 @@
+This folder IS the website.
+Leave it on your Desktop.
+Do not put it inside another folder.
+Open HANDOFF.md for the info.
