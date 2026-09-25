@@ -84,5 +84,8 @@
   },
   "footer": {
     "tagline": "Handmade with care · Blankets, scarves, hats & more"
+  },
+  "chat": {
+    "notifyEmail": ""
   }
 }

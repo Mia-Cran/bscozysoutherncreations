@@ -53,6 +53,7 @@
   };
 
   const fillForm = (data) => {
+    if (!data.chat) data.chat = { notifyEmail: "" };
     editorForm.querySelectorAll("[name]").forEach((field) => {
       if (field.dataset.token !== undefined) return;
       const parts = field.name.split(".");
@@ -80,17 +81,46 @@
       wrap.querySelector('[name$=".image"]').value = product.image;
       wrap.querySelector('[name$=".buyUrl"]').value = product.buyUrl || "";
     });
+
+    renderChatLeads();
+  };
+
+  const renderChatLeads = () => {
+    const mount = document.querySelector("[data-chat-leads]");
+    if (!mount) return;
+    let leads = [];
+    try {
+      leads = JSON.parse(localStorage.getItem("bsc-chat-leads") || "[]");
+    } catch {
+      leads = [];
+    }
+    if (!leads.length) {
+      mount.innerHTML = `<p class="hint">No chat leads saved in this browser yet.</p>`;
+      return;
+    }
+    mount.innerHTML = leads
+      .slice(0, 20)
+      .map((lead) => {
+        const when = lead.createdAt ? new Date(lead.createdAt).toLocaleString() : "";
+        const summary = (lead.summary || "").replace(/</g, "&lt;");
+        return `<article class="lead-card"><p class="hint">${when}</p><pre>${summary}</pre></article>`;
+      })
+      .join("");
   };
 
   const readForm = () => {
     const next = structuredClone(content);
+    if (!next.chat) next.chat = { notifyEmail: "" };
     editorForm.querySelectorAll("[name]").forEach((field) => {
       if (field.dataset.token !== undefined) return;
       const parts = field.name.split(".");
       let cursor = next;
       parts.forEach((part, i) => {
         if (i === parts.length - 1) cursor[part] = field.value;
-        else cursor = cursor[part];
+        else {
+          if (cursor[part] == null || typeof cursor[part] !== "object") cursor[part] = {};
+          cursor = cursor[part];
+        }
       });
     });
     return next;
