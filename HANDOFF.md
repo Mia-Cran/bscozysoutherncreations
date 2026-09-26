@@ -1,4 +1,4 @@
-# B's Southern Creations — full handoff
+# B's Cozy Southern Creations — full handoff
 
 **This project is NOT FlashTrack.** Do not mix the two.
 
@@ -9,9 +9,9 @@ Use this file + the photo packs to continue in a **new Cursor chat** (or any oth
 ## Paste into a new Cursor chat
 
 ```
-This chat is ONLY for B's Southern Creations — not FlashTrack, not Notion.
+This chat is ONLY for B's Cozy Southern Creations — not FlashTrack, not Notion.
 
-Brand: B's Southern Creations — handmade blankets, scarves, hats, custom knit gifts.
+Brand: B's Cozy Southern Creations — handmade blankets, scarves, hats, custom knit gifts.
 Site folder: bs-southern-creations/ (plain HTML/CSS/JS)
 Branch: cursor/bs-southern-creations-1ab4
 PR: https://github.com/Mia-Cran/flashtrack-ai-learning-platform/pull/14
@@ -24,7 +24,7 @@ Photos & logos:
 
 Decisions:
 - Host: GitHub Pages (free). Domain at Namecheap.
-- Domain for business card: bssoutherncreations.com (B’s + southern + creations; apostrophe dropped)
+- Domain for business card: bscozysoutherncreations.com (B’s + southern + creations; apostrophe dropped)
 - Domain bought at Namecheap (domain only). Site is free (GitHub Pages), not a Namecheap website.
 - Cloudflare trycloudflare tunnels are temporary — never for a business card
 - Business cards: Layout A = centered logo; Layout B = split mark + name. Tagline on B was "Custom orders & textiles" (optional)
@@ -38,7 +38,7 @@ Continue from this handoff. Keep FlashTrack out of this chat.
 
 ## What the site is
 
-One-page marketing site for **B's Southern Creations**.
+One-page marketing site for **B's Cozy Southern Creations**.
 
 - Hero: logo + “Handmade warmth, southern heart.”
 - Shop grid: blankets, scarves, hats, sets
@@ -133,7 +133,7 @@ In `_export/mockups/`:
 ## Hosting & domain
 
 1. Deploy on **GitHub Pages** (free) from the `bsoutherncreations` repo
-2. Domain **`bssoutherncreations.com`** is at Namecheap
+2. Domain **`bscozysoutherncreations.com`** is at Namecheap
 3. Point Namecheap DNS at GitHub Pages, then print that URL on the card
 4. Print that URL on the business card
 
@@ -144,7 +144,7 @@ Cloudflare `*.trycloudflare.com` links die when the session ends.
 ## Business card
 
 - **A — Centered:** full logo, site under it  
-- **B — Split:** mark left; name + `bssoutherncreations.com` right  
+- **B — Split:** mark left; name + `bscozysoutherncreations.com` right  
 - Optional line on B: “Custom orders & textiles” = made-to-order + fabric/knit goods (can remove)
 
 ---

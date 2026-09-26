@@ -1,0 +1,1029 @@
+/* Seasonal / holiday pages — each one fills the screen the way resin does */
+
+.page-season {
+  min-height: 100svh;
+}
+
+.season-sheet,
+.season-fallout {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page-season .site-header,
+.page-season main,
+.page-season .site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.page-season .site-header {
+  z-index: 10;
+}
+
+.season-ornaments {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orn {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.o-tl,
+.o-tr {
+  top: 4.4rem;
+  width: min(300px, 38vw);
+  height: min(300px, 38vw);
+}
+
+.o-tl { left: 0; }
+.o-tr { right: 0; transform: scaleX(-1); }
+
+.o-bl,
+.o-br {
+  bottom: 0.4rem;
+  width: min(260px, 34vw);
+  height: min(260px, 34vw);
+}
+
+.o-bl { left: 0; }
+.o-br { right: 0; transform: scaleX(-1); }
+
+.o-top,
+.o-bottom {
+  left: 0;
+  right: 0;
+  height: 88px;
+  background-repeat: repeat-x;
+  background-size: auto 88px;
+}
+
+.o-top { top: 3.6rem; }
+.o-bottom { bottom: 0; }
+
+.o-hang-l,
+.o-hang-r {
+  top: 4.2rem;
+  width: 78px;
+  height: 190px;
+  background-position: top center;
+}
+
+.o-hang-l { left: 7%; }
+.o-hang-r { right: 7%; }
+
+.o-side-l,
+.o-side-r {
+  top: 22%;
+  width: 110px;
+  height: 58%;
+  background-position: center top;
+}
+
+.o-side-l { left: 0.4rem; }
+.o-side-r { right: 0.4rem; transform: scaleX(-1); }
+
+.season-title::before {
+  content: "";
+  display: block;
+  width: 88px;
+  height: 42px;
+  margin: 0 auto 0.7rem;
+  background: var(--season-flourish) center / contain no-repeat;
+}
+
+.season-ornaments {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orn {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.o-tl { top: 4.2rem; left: 0; width: min(300px, 38vw); height: min(300px, 38vw); }
+.o-tr { top: 4.2rem; right: 0; width: min(300px, 38vw); height: min(300px, 38vw); transform: scaleX(-1); }
+.o-bl { bottom: 0; left: 0; width: min(280px, 36vw); height: min(280px, 36vw); }
+.o-br { bottom: 0; right: 0; width: min(280px, 36vw); height: min(280px, 36vw); transform: scaleX(-1); }
+.o-top { top: 0; left: 0; right: 0; height: 92px; background-repeat: repeat-x; background-size: auto 92px; background-position: top center; }
+.o-bottom { bottom: 0; left: 0; right: 0; height: 72px; background-repeat: repeat-x; background-size: auto 72px; background-position: bottom center; }
+.o-hang-l { top: 0; left: 12%; width: 78px; height: 190px; background-position: top center; }
+.o-hang-r { top: 0; right: 12%; width: 78px; height: 190px; background-position: top center; }
+.o-side-l { top: 22%; left: 0; width: 110px; height: 58vh; background-position: left center; }
+.o-side-r { top: 22%; right: 0; width: 110px; height: 58vh; background-position: right center; transform: scaleX(-1); }
+
+.season-title::before {
+  content: "";
+  display: block;
+  width: 92px;
+  height: 42px;
+  margin: 0 auto 0.8rem;
+  background: var(--season-flourish) center / contain no-repeat;
+}
+
+.season-ornaments {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orn {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.o-tl { top: 4.2rem; left: 0.35rem; width: min(300px, 38vw); height: min(300px, 38vw); }
+.o-tr { top: 4.2rem; right: 0.35rem; width: min(300px, 38vw); height: min(300px, 38vw); transform: scaleX(-1); }
+.o-bl { bottom: 0.2rem; left: 0.35rem; width: min(280px, 36vw); height: min(280px, 36vw); }
+.o-br { bottom: 0.2rem; right: 0.35rem; width: min(280px, 36vw); height: min(280px, 36vw); transform: scaleX(-1); }
+.o-top { top: 0; left: 0; right: 0; height: 88px; background-repeat: repeat-x; background-size: auto 88px; background-position: top center; }
+.o-bottom { bottom: 0; left: 0; right: 0; height: 88px; background-repeat: repeat-x; background-size: auto 88px; background-position: bottom center; }
+.o-hang-l { top: 0; left: 12%; width: 78px; height: 190px; background-position: top center; }
+.o-hang-r { top: 0; right: 12%; width: 78px; height: 190px; background-position: top center; }
+.o-side-l { top: 22%; left: 0; width: 92px; height: min(420px, 58vh); background-position: left center; }
+.o-side-r { top: 22%; right: 0; width: 92px; height: min(420px, 58vh); background-position: right center; transform: scaleX(-1); }
+
+.season-title::before {
+  content: "";
+  display: block;
+  width: 92px;
+  height: 42px;
+  margin: 0 auto 0.7rem;
+  background: var(--season-flourish) center / contain no-repeat;
+}
+
+.season-panel {
+  padding: 2rem clamp(1.25rem, 4vw, 2.4rem);
+  background: #faf7f2 !important;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  box-shadow: 0 22px 60px rgba(20, 16, 12, 0.28);
+}
+
+.season-title {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5.2vw, 3.2rem);
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.page-season .hero {
+  padding-bottom: 3rem;
+}
+
+.page-season .section {
+  background: transparent;
+}
+
+.page-season .hero-inner {
+  text-align: center;
+  margin-inline: auto;
+}
+
+.page-season .hero-lede,
+.page-season .hero-actions {
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.season-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.season-card {
+  margin: 0;
+  padding: 1.2rem 1.25rem 1.3rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+}
+
+.season-card h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.season-card p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.page-season .site-footer {
+  backdrop-filter: blur(10px);
+}
+
+/* Valentine's — blush, rose, floating hearts */
+.season-valentines {
+  background: #f6dde4;
+  --season-accent: #b54a62;
+}
+
+.season-valentines .season-sheet {
+  background-color: #f6dde4;
+  background-image:
+    url("../assets/seasons/hearts.svg"),
+    radial-gradient(ellipse 70% 50% at 12% 18%, rgba(232, 120, 142, 0.45), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 88% 12%, rgba(255, 220, 228, 0.9), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 70% 85%, rgba(196, 91, 114, 0.28), transparent 55%),
+    linear-gradient(165deg, #fbe7ec 0%, #f3c9d4 48%, #f7dde5 100%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 160px, auto, auto, auto, auto;
+}
+
+.season-valentines {
+  --season-flourish: url("../assets/seasons/hearts.svg");
+}
+
+.season-valentines .season-fallout {
+  background-image: url("../assets/seasons/hearts.svg");
+  background-size: 120px;
+  animation: season-drift 16s linear infinite;
+  opacity: 0.7;
+}
+
+.season-valentines .o-tl,
+.season-valentines .o-tr,
+.season-valentines .o-bl,
+.season-valentines .o-br {
+  background-image: url("../assets/seasons/valentines-roses.svg");
+}
+
+.season-valentines .o-top,
+.season-valentines .o-bottom {
+  background-image: url("../assets/seasons/valentines-lace.svg");
+}
+
+.season-valentines .site-header {
+  background: linear-gradient(180deg, rgba(255, 244, 247, 0.92), rgba(255, 244, 247, 0.5) 70%, transparent);
+}
+
+.season-valentines .eyebrow,
+.season-valentines .nav-cta {
+  color: #b54a62 !important;
+}
+
+.season-valentines .btn-primary {
+  background: #b54a62;
+}
+
+.season-valentines .btn-primary:hover {
+  background: #933d51;
+}
+
+.season-valentines .site-footer {
+  background: rgba(247, 221, 229, 0.78);
+}
+
+/* Spring — garden blooms and drifting petals */
+.season-spring {
+  background: #e7f3ea;
+  --season-accent: #4f7d64;
+}
+
+.season-spring .season-sheet {
+  background-color: #e7f3ea;
+  background-image:
+    url("../assets/seasons/petals.svg"),
+    radial-gradient(ellipse 80% 55% at 10% 20%, rgba(126, 201, 154, 0.42), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(181, 154, 212, 0.32), transparent 50%),
+    radial-gradient(ellipse 50% 45% at 75% 80%, rgba(212, 138, 160, 0.28), transparent 55%),
+    linear-gradient(165deg, #f4faf5 0%, #e3f0e6 45%, #f7f1e8 100%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 150px, auto, auto, auto, auto;
+}
+
+.season-spring {
+  --season-flourish: url("../assets/seasons/petals.svg");
+}
+
+.season-spring .o-tl,
+.season-spring .o-tr,
+.season-spring .o-bl,
+.season-spring .o-br {
+  background-image: url("../assets/seasons/spring-blooms.svg");
+}
+
+.season-spring .o-side-l,
+.season-spring .o-side-r {
+  background-image: url("../assets/seasons/spring-vines.svg");
+  width: min(220px, 30vw);
+  height: min(280px, 40vh);
+}
+
+.season-spring .season-fallout {
+  background-image: url("../assets/seasons/petals.svg");
+  background-size: 140px;
+  animation: season-drift 18s linear infinite;
+  opacity: 0.85;
+}
+
+.season-spring {
+  --season-flourish: url("../assets/seasons/spring-blooms.svg");
+}
+
+.season-spring .o-tl,
+.season-spring .o-tr,
+.season-spring .o-bl,
+.season-spring .o-br {
+  background-image: url("../assets/seasons/spring-blooms.svg");
+}
+
+.season-spring .o-side-l,
+.season-spring .o-side-r {
+  background-image: url("../assets/seasons/spring-vines.svg");
+  width: min(240px, 32vw);
+  height: min(180px, 28vh);
+  top: auto;
+  bottom: 8%;
+}
+
+.season-spring .site-header {
+  background: linear-gradient(180deg, rgba(244, 250, 245, 0.92), rgba(244, 250, 245, 0.5) 70%, transparent);
+}
+
+.season-spring .site-footer {
+  background: rgba(231, 243, 234, 0.78);
+}
+
+/* Easter — mint, butter, lilac, speckled eggshell */
+.season-easter {
+  background: #e8f6ef;
+  --season-accent: #6a8fbf;
+}
+
+.season-easter .season-sheet {
+  background-color: #e8f6ef;
+  background-image:
+    url("../assets/seasons/speckle.svg"),
+    radial-gradient(ellipse 55% 45% at 18% 22%, rgba(186, 214, 168, 0.7), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 82% 16%, rgba(247, 220, 150, 0.7), transparent 50%),
+    radial-gradient(ellipse 55% 45% at 70% 82%, rgba(196, 176, 232, 0.35), transparent 55%),
+    linear-gradient(165deg, #f7fff8 0%, #e4f4ec 40%, #fff4cc 100%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 90px, auto, auto, auto, auto;
+}
+
+.season-easter {
+  --season-flourish: url("../assets/seasons/easter-bow.svg");
+}
+
+.season-easter .o-tl,
+.season-easter .o-tr,
+.season-easter .o-bl,
+.season-easter .o-br {
+  background-image: url("../assets/seasons/easter-eggs.svg");
+}
+
+.season-easter .o-hang-l,
+.season-easter .o-hang-r {
+  top: 5.2rem;
+  width: 150px;
+  height: 90px;
+  background-image: url("../assets/seasons/easter-bow.svg");
+}
+
+.season-easter .o-bottom {
+  height: 120px;
+  background-image: url("../assets/seasons/easter-eggs.svg");
+  background-repeat: repeat-x;
+  background-size: 160px auto;
+  background-position: bottom center;
+}
+
+.season-easter .eyebrow,
+.season-easter .nav-cta {
+  color: #6a8fbf !important;
+}
+
+.season-easter .btn-primary {
+  background: #6a8fbf;
+}
+
+.season-easter .btn-primary:hover {
+  background: #5676a3;
+}
+
+.season-easter .site-header {
+  background: linear-gradient(180deg, rgba(247, 255, 248, 0.92), rgba(247, 255, 248, 0.5) 70%, transparent);
+}
+
+.season-easter .site-footer {
+  background: rgba(232, 246, 239, 0.78);
+}
+
+/* Summer — peach, lemonade, hydrangea, heat shimmer */
+.season-summer {
+  background: #fde9cf;
+  --season-accent: #d06a3a;
+}
+
+.season-summer .season-sheet {
+  background-color: #fde9cf;
+  background-image:
+    url("../assets/seasons/sparkle.svg"),
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(255, 236, 150, 0.85), transparent 58%),
+    radial-gradient(ellipse 50% 45% at 8% 80%, rgba(255, 214, 120, 0.45), transparent 55%),
+    radial-gradient(ellipse 45% 40% at 92% 70%, rgba(255, 168, 130, 0.5), transparent 50%),
+    linear-gradient(180deg, #fff4d6 0%, #f7c98a 42%, #f3b56a 100%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 180px, auto, auto, auto, auto;
+}
+
+.season-summer {
+  --season-flourish: url("../assets/seasons/summer-sun.svg");
+}
+
+.season-summer .o-tr {
+  transform: none;
+  top: 3.4rem;
+  right: 0;
+  width: min(340px, 46vw);
+  height: min(340px, 46vw);
+  background-image: url("../assets/seasons/summer-sun.svg");
+}
+
+.season-summer .o-tl,
+.season-summer .o-bl,
+.season-summer .o-br {
+  background-image: url("../assets/seasons/summer-hydrangea.svg");
+}
+
+.season-summer .season-fallout {
+  background-image: url("../assets/seasons/sparkle.svg");
+  background-size: 160px;
+  animation: season-drift 14s linear infinite;
+  opacity: 0.75;
+}
+
+.season-summer .eyebrow,
+.season-summer .nav-cta {
+  color: #c45a22 !important;
+}
+
+.season-summer .btn-primary {
+  background: #c45a22;
+}
+
+.season-summer .btn-primary:hover {
+  background: #a3491b;
+}
+
+.season-summer .site-header {
+  background: linear-gradient(180deg, rgba(255, 248, 230, 0.92), rgba(255, 248, 230, 0.45) 70%, transparent);
+}
+
+.season-summer .site-footer {
+  background: rgba(253, 233, 207, 0.8);
+}
+
+/* Fall — amber, rust, pecan, falling leaves */
+.season-fall {
+  background: #f0d3b0;
+  --season-accent: #9a4320;
+}
+
+.season-fall .season-sheet {
+  background-color: #f0d3b0;
+  background-image:
+    url("../assets/seasons/leaves.svg"),
+    radial-gradient(ellipse 70% 50% at 10% 15%, rgba(232, 150, 70, 0.45), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 90% 20%, rgba(154, 67, 32, 0.28), transparent 50%),
+    radial-gradient(ellipse 60% 50% at 60% 90%, rgba(122, 70, 32, 0.22), transparent 55%),
+    linear-gradient(165deg, #f8e2c4 0%, #e8b57a 48%, #d4894a 100%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 280px, auto, auto, auto, auto;
+}
+
+.season-fall .season-fallout {
+  background-image: url("../assets/seasons/leaves.svg"), url("../assets/seasons/fall-maple.svg");
+  background-size: 140px, 220px;
+  animation: season-drift 16s linear infinite;
+  opacity: 0.85;
+}
+
+.season-fall {
+  --season-flourish: url("../assets/seasons/fall-maple.svg");
+}
+
+.season-fall .o-tl,
+.season-fall .o-tr,
+.season-fall .o-bl,
+.season-fall .o-br {
+  background-image: url("../assets/seasons/fall-maple.svg");
+}
+
+.season-fall .o-side-l,
+.season-fall .o-side-r {
+  background-image: url("../assets/seasons/fall-wheat.svg");
+}
+
+.season-fall .eyebrow,
+.season-fall .nav-cta {
+  color: #9a4320 !important;
+}
+
+.season-fall .btn-primary {
+  background: #9a4320;
+}
+
+.season-fall .btn-primary:hover {
+  background: #7c3518;
+}
+
+.season-fall .site-header {
+  background: linear-gradient(180deg, rgba(248, 226, 196, 0.94), rgba(248, 226, 196, 0.5) 70%, transparent);
+}
+
+.season-fall .site-footer {
+  background: rgba(240, 211, 176, 0.8);
+}
+
+/* Halloween — moonlight, plum, ember — pretty, not cartoon */
+.season-halloween {
+  background: #1c1428;
+  color: #f4e8d8;
+  --season-accent: #e08a3c;
+}
+
+.season-halloween .season-sheet {
+  background-color: #1c1428;
+  background-image:
+    url("../assets/seasons/sparkle.svg"),
+    radial-gradient(ellipse 45% 40% at 78% 12%, rgba(240, 210, 140, 0.45), transparent 55%),
+    radial-gradient(ellipse 70% 55% at 8% 80%, rgba(88, 36, 92, 0.7), transparent 55%),
+    radial-gradient(ellipse 50% 45% at 92% 70%, rgba(196, 90, 40, 0.28), transparent 50%),
+    linear-gradient(180deg, #2a1b3d 0%, #1c1428 48%, #120e18 100%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 180px, auto, auto, auto, auto;
+}
+
+.season-halloween {
+  --season-flourish: url("../assets/seasons/halloween-moon.svg");
+}
+
+.season-halloween .o-tr {
+  transform: none;
+  top: 3.2rem;
+  width: min(360px, 48vw);
+  height: min(360px, 48vw);
+  background-image: url("../assets/seasons/halloween-moon.svg");
+}
+
+.season-halloween .o-tl {
+  background-image: url("../assets/seasons/halloween-web.svg");
+}
+
+.season-halloween .o-hang-l,
+.season-halloween .o-hang-r {
+  background-image: url("../assets/seasons/halloween-lantern.svg");
+}
+
+.season-halloween .wordmark,
+.season-halloween .nav a,
+.season-halloween .nav-dropdown-toggle {
+  color: #f4e8d8;
+}
+
+.season-halloween .nav a,
+.season-halloween .nav-dropdown-toggle {
+  color: rgba(244, 232, 216, 0.82);
+}
+
+.season-halloween .nav a:hover,
+.season-halloween .nav-dropdown-toggle:hover,
+.season-halloween .nav-dropdown-toggle[aria-expanded="true"] {
+  color: #fff;
+}
+
+.season-halloween .admin-entry {
+  background: rgba(28, 20, 40, 0.7);
+  color: #f4e8d8;
+  border-color: rgba(244, 232, 216, 0.28);
+}
+
+.season-halloween .season-panel {
+  background: #2a1b3d !important;
+  border-color: rgba(224, 138, 60, 0.35);
+  color: #f4e8d8;
+}
+
+.season-halloween .season-title,
+.season-halloween .season-card h3,
+.season-halloween .section h2 {
+  color: #f8eedc;
+}
+
+.season-halloween .hero-lede,
+.season-halloween .section-lede,
+.season-halloween .season-card p,
+.season-halloween .contact-form label {
+  color: rgba(244, 232, 216, 0.78);
+}
+
+.season-halloween .season-card {
+  background: rgba(255, 244, 228, 0.08);
+  border-color: rgba(224, 138, 60, 0.22);
+}
+
+.season-halloween .eyebrow,
+.season-halloween .nav-cta {
+  color: #e08a3c !important;
+}
+
+.season-halloween .btn-primary {
+  background: #e08a3c;
+  color: #1c1428;
+}
+
+.season-halloween .btn-primary:hover {
+  background: #f0a05a;
+}
+
+.season-halloween .btn-ghost {
+  border-color: rgba(244, 232, 216, 0.4);
+  color: #f4e8d8;
+}
+
+.season-halloween .contact-form input,
+.season-halloween .contact-form textarea {
+  background: rgba(255, 248, 236, 0.94);
+  color: #1c1428;
+}
+
+.season-halloween .site-header {
+  background: linear-gradient(180deg, rgba(18, 12, 28, 0.92), rgba(18, 12, 28, 0.45) 70%, transparent);
+}
+
+.season-halloween .lang-switch {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: transparent;
+}
+
+.season-halloween .lang-btn {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.season-halloween .lang-btn[aria-pressed="true"] {
+  background: #fff;
+  color: #1c1428;
+}
+
+.season-halloween .site-footer {
+  background: rgba(18, 12, 28, 0.78);
+  border-top-color: rgba(224, 138, 60, 0.22);
+  color: #f4e8d8;
+}
+
+.season-halloween .site-footer .fine {
+  color: rgba(244, 232, 216, 0.7);
+}
+
+.season-halloween .nav-dropdown-menu {
+  background: #2a1b3d;
+  border-color: rgba(224, 138, 60, 0.28);
+}
+
+.season-halloween .nav-dropdown-menu a {
+  color: rgba(244, 232, 216, 0.86);
+}
+
+.season-halloween .nav-dropdown-menu a:hover {
+  background: rgba(224, 138, 60, 0.16);
+  color: #fff;
+}
+
+/* Thanksgiving — linen, pecan, harvest gold */
+.season-thanksgiving {
+  background: #efe2cf;
+  --season-accent: #7a4a24;
+}
+
+.season-thanksgiving .season-sheet {
+  background-color: #efe2cf;
+  background-image:
+    url("../assets/seasons/speckle.svg"),
+    radial-gradient(ellipse 65% 50% at 14% 18%, rgba(214, 170, 90, 0.4), transparent 55%),
+    radial-gradient(ellipse 50% 45% at 88% 20%, rgba(154, 90, 48, 0.22), transparent 50%),
+    radial-gradient(ellipse 55% 45% at 70% 85%, rgba(122, 138, 90, 0.22), transparent 55%),
+    linear-gradient(165deg, #f7edd8 0%, #e6d0a8 48%, #d8b888 100%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 120px, auto, auto, auto, auto;
+}
+
+.season-thanksgiving {
+  --season-flourish: url("../assets/seasons/thanks-wheat.svg");
+}
+
+.season-thanksgiving .o-side-l,
+.season-thanksgiving .o-side-r {
+  background-image: url("../assets/seasons/thanks-wheat.svg");
+}
+
+.season-thanksgiving .o-bl,
+.season-thanksgiving .o-br {
+  background-image: url("../assets/seasons/thanks-gourd.svg");
+}
+
+.season-thanksgiving .o-tl,
+.season-thanksgiving .o-tr {
+  background-image: url("../assets/seasons/thanks-wheat.svg");
+}
+
+.season-thanksgiving .eyebrow,
+.season-thanksgiving .nav-cta {
+  color: #7a4a24 !important;
+}
+
+.season-thanksgiving .btn-primary {
+  background: #7a4a24;
+}
+
+.season-thanksgiving .btn-primary:hover {
+  background: #623b1c;
+}
+
+.season-thanksgiving .site-header {
+  background: linear-gradient(180deg, rgba(247, 237, 216, 0.94), rgba(247, 237, 216, 0.5) 70%, transparent);
+}
+
+.season-thanksgiving .site-footer {
+  background: rgba(239, 226, 207, 0.82);
+}
+
+/* Christmas — evergreen, cranberry, gold sparkle */
+.season-christmas {
+  background: #1e3a2c;
+  color: #f7f1e6;
+  --season-accent: #c43c48;
+}
+
+.season-christmas .season-sheet {
+  background-color: #1e3a2c;
+  background-image:
+    url("../assets/seasons/snow.svg"),
+    url("../assets/seasons/sparkle.svg"),
+    radial-gradient(ellipse 55% 45% at 80% 8%, rgba(242, 212, 138, 0.28), transparent 55%),
+    radial-gradient(ellipse 70% 55% at 10% 90%, rgba(18, 48, 32, 0.8), transparent 55%),
+    linear-gradient(180deg, #2a4f3a 0%, #1e3a2c 50%, #14261c 100%);
+  background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 220px, 240px, auto, auto, auto;
+}
+
+.season-christmas .season-fallout {
+  background-image: url("../assets/seasons/snow.svg"), url("../assets/seasons/sparkle.svg");
+  background-size: 140px, 180px;
+  animation: season-drift 14s linear infinite;
+  opacity: 0.9;
+}
+
+.season-christmas {
+  --season-flourish: url("../assets/seasons/xmas-holly.svg");
+}
+
+.season-christmas .o-top,
+.season-christmas .o-bottom {
+  height: 96px;
+  background-image: url("../assets/seasons/xmas-bough.svg");
+  background-size: auto 96px;
+}
+
+.season-christmas .o-tl,
+.season-christmas .o-tr,
+.season-christmas .o-bl,
+.season-christmas .o-br {
+  background-image: url("../assets/seasons/xmas-holly.svg");
+}
+
+.season-christmas .o-hang-l,
+.season-christmas .o-hang-r {
+  background-image: url("../assets/seasons/xmas-bauble.svg");
+}
+
+.season-christmas .wordmark,
+.season-christmas .nav a,
+.season-christmas .nav-dropdown-toggle {
+  color: #f7f1e6;
+}
+
+.season-christmas .nav a,
+.season-christmas .nav-dropdown-toggle {
+  color: rgba(247, 241, 230, 0.84);
+}
+
+.season-christmas .nav a:hover,
+.season-christmas .nav-dropdown-toggle:hover,
+.season-christmas .nav-dropdown-toggle[aria-expanded="true"] {
+  color: #fff;
+}
+
+.season-christmas .admin-entry {
+  background: rgba(30, 58, 44, 0.72);
+  color: #f7f1e6;
+  border-color: rgba(247, 241, 230, 0.28);
+}
+
+.season-christmas .season-panel {
+  background: #faf7f2;
+  color: var(--ink);
+}
+
+.season-christmas .season-title,
+.season-christmas .section h2,
+.season-christmas .season-card h3 {
+  color: var(--ink);
+}
+
+.season-christmas .hero-lede,
+.season-christmas .section-lede,
+.season-christmas .season-card p {
+  color: var(--ink-soft);
+}
+
+.season-christmas .eyebrow,
+.season-christmas .nav-cta {
+  color: #e8c56a !important;
+}
+
+.season-christmas .hero .eyebrow {
+  color: #c43c48 !important;
+}
+
+.season-christmas .btn-primary {
+  background: #c43c48;
+}
+
+.season-christmas .btn-primary:hover {
+  background: #a3303a;
+}
+
+.season-christmas .btn-ghost {
+  border-color: rgba(247, 241, 230, 0.45);
+  color: #f7f1e6;
+}
+
+.season-christmas .hero .btn-ghost {
+  border-color: rgba(44, 53, 48, 0.28);
+  color: var(--ink);
+}
+
+.season-christmas .site-header {
+  background: linear-gradient(180deg, rgba(20, 38, 28, 0.94), rgba(20, 38, 28, 0.45) 70%, transparent);
+}
+
+.season-christmas .lang-switch {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: transparent;
+}
+
+.season-christmas .lang-btn {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.season-christmas .lang-btn[aria-pressed="true"] {
+  background: #fff;
+  color: #14261c;
+}
+
+.season-christmas .site-footer {
+  background: rgba(20, 38, 28, 0.82);
+  border-top-color: rgba(232, 197, 106, 0.22);
+  color: #f7f1e6;
+}
+
+.season-christmas .site-footer .fine {
+  color: rgba(247, 241, 230, 0.7);
+}
+
+.season-christmas .nav-dropdown-menu {
+  background: #faf7f2;
+}
+
+.season-christmas .nav-dropdown-menu a {
+  color: var(--ink-soft);
+}
+
+@keyframes season-drift {
+  from { background-position: 0 0; }
+  to { background-position: 40px -320px; }
+}
+
+@media (max-width: 760px) {
+  .season-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-season .hero-inner,
+  .page-season .hero-actions {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .o-side-l,
+  .o-side-r,
+  .o-hang-l,
+  .o-hang-r {
+    display: none;
+  }
+
+  .o-tl,
+  .o-tr,
+  .o-bl,
+  .o-br {
+    width: min(160px, 42vw);
+    height: min(160px, 42vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .season-fallout {
+    animation: none !important;
+  }
+}
+
+/* Real photographed decorations */
+.season-ornaments,
+.season-fallout {
+  display: none !important;
+}
+
+.season-title::before {
+  content: none !important;
+  display: none !important;
+}
+
+.season-sheet {
+  background-color: #1a1512;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.season-sheet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 14, 12, 0.28) 0%,
+    transparent 26%,
+    transparent 78%,
+    rgba(18, 14, 12, 0.2) 100%
+  );
+}
+
+.season-valentines .season-sheet {
+  background-image: url("../assets/seasons/valentines-real.jpg") !important;
+}
+
+.season-spring .season-sheet {
+  background-image: url("../assets/seasons/spring-real.jpg") !important;
+}
+
+.season-easter .season-sheet {
+  background-image: url("../assets/seasons/easter-real.jpg") !important;
+}
+
+.season-summer .season-sheet {
+  background-image: url("../assets/seasons/summer-real.jpg") !important;
+}
+
+.season-fall .season-sheet {
+  background-image: url("../assets/seasons/fall-real.jpg") !important;
+}
+
+.season-halloween .season-sheet {
+  background-image: url("../assets/seasons/halloween-real.jpg") !important;
+}
+
+.season-thanksgiving .season-sheet {
+  background-image: url("../assets/seasons/thanksgiving-real.jpg") !important;
+}
+
+.season-christmas .season-sheet {
+  background-image: url("../assets/seasons/christmas-real.jpg") !important;
+}
