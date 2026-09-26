@@ -3,25 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shop editor — B's Southern Creations</title>
+  <title>Shop editor — B's Cozy Southern Creations</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css" />
-  <link rel="icon" href="../assets/favicon.png" type="image/png" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
 </head>
 <body>
   <div class="login" data-screen="login">
-    <img src="../assets/mark.png" alt="" width="72" height="72" />
-    <h1>B's Southern Creations</h1>
+    <img src="/assets/mark.svg" alt="" width="72" height="72" />
+    <h1>B's Cozy Southern Creations</h1>
     <p>Shop editor</p>
-    <form class="card" data-login>
+    <form class="card" data-login autocomplete="off">
+      <input type="text" name="username" autocomplete="username" tabindex="-1" aria-hidden="true" class="autofill-trap" value="" />
       <label>
         Password
-        <input type="password" name="password" autocomplete="current-password" required />
+        <input
+          type="password"
+          name="shop-editor-key"
+          data-pass
+          autocomplete="new-password"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          readonly
+          required
+        />
       </label>
-      <button class="btn" type="submit">Log in</button>
+      <button class="btn" type="submit" data-login-btn>Log in</button>
       <p class="error" data-login-error hidden>That password doesn’t match.</p>
     </form>
   </div>
@@ -29,7 +40,7 @@
   <div class="editor" data-screen="editor" hidden>
     <header class="bar">
       <div class="bar-brand">
-        <img src="../assets/mark.png" alt="" width="36" height="36" />
+        <img src="/assets/mark.svg" alt="" width="36" height="36" />
         <span>Shop editor</span>
       </div>
       <div class="bar-actions">
@@ -49,6 +60,26 @@
         <label>Right button <input name="hero.secondaryCta" /></label>
       </section>
 
+      <section data-featured-block>
+        <h2>Featured photo</h2>
+        <p class="hint">This is the big picture under the homepage logo. Upload a new photo and add a price anytime.</p>
+        <div class="photo-row">
+          <img class="preview" data-featured-preview alt="Featured product photo" />
+          <label class="upload">
+            Upload photo
+            <input type="file" accept="image/*" data-featured-file />
+          </label>
+        </div>
+        <input type="hidden" name="featured.image" />
+        <label>Photo description <input name="featured.alt" placeholder="Pink chenille throw on a chair" /></label>
+        <label>Small label <input name="featured.eyebrow" /></label>
+        <label>Title <input name="featured.title" /></label>
+        <label>Story <textarea name="featured.text" rows="3"></textarea></label>
+        <label>Price <input name="featured.price" placeholder="$85" /></label>
+        <label>Button <input name="featured.cta" /></label>
+        <label>Buy link <input name="featured.buyUrl" placeholder="https://buy.stripe.com/..." /></label>
+      </section>
+
       <section>
         <h2>Shop heading</h2>
         <label>Small label <input name="shop.eyebrow" /></label>
@@ -58,7 +89,9 @@
 
       <section data-product-fields>
         <h2>Products</h2>
-        <p class="hint">Paste a Stripe/Square buy link when you have one. Leave blank to send people to Say hello.</p>
+        <p class="hint">Upload a photo, type a price, and save. Leave the buy link blank to send people to Say hello.</p>
+        <div data-product-list></div>
+        <button class="btn btn-ghost" type="button" data-add-product>Add a product</button>
       </section>
 
       <section>
@@ -76,6 +109,7 @@
         <label>Intro <textarea name="contact.lede" rows="3"></textarea></label>
         <label>Box hint <input name="contact.placeholder" /></label>
         <label>Thanks message <input name="contact.thanks" /></label>
+        <label>Inbox email for requests <input name="contact.email" placeholder="shop@email.com" /></label>
       </section>
 
       <section>
@@ -94,6 +128,6 @@
     </form>
   </div>
 
-  <script src="admin.js"></script>
+  <script src="/admin/admin.js"></script>
 </body>
 </html>

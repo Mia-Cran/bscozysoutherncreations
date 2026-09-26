@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="logoTitle logoDesc">
-  <title id="logoTitle">B's Southern Creations</title>
-  <desc id="logoDesc">A pastel floral medallion with the letters BSC and the brand name in script.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 660" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">B's Cozy Southern Creations</title>
+  <desc id="logoDesc">A pastel floral medallion with the letters BCSC and the brand name in script.</desc>
   <defs>
     <style type="text/css">
       @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap");
@@ -61,6 +61,9 @@
     <linearGradient id="letterB" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#5a9ad8"/><stop offset="100%" stop-color="#7eb8e8"/>
     </linearGradient>
+    <linearGradient id="letterCozy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4eb0a8"/><stop offset="100%" stop-color="#7ec9c0"/>
+    </linearGradient>
     <linearGradient id="letterS" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#9a70c8"/><stop offset="100%" stop-color="#c888c0"/>
     </linearGradient>
@@ -69,9 +72,7 @@
     </linearGradient>
   </defs>
 
-  <!-- Flower medallion -->
-  <g transform="translate(210,175)">
-    <!-- 12 petals -->
+  <g transform="translate(360,272) scale(2.33)">
     <g id="petals">
       <path d="M0,-42 C12,-70 28,-95 0,-118 C-28,-95 -12,-70 0,-42 Z" fill="url(#petal0)" stroke="#fff" stroke-width="2.5" transform="rotate(0)"/>
       <path d="M0,-42 C12,-70 28,-95 0,-118 C-28,-95 -12,-70 0,-42 Z" fill="url(#petal1)" stroke="#fff" stroke-width="2.5" transform="rotate(30)"/>
@@ -86,14 +87,11 @@
       <path d="M0,-42 C12,-70 28,-95 0,-118 C-28,-95 -12,-70 0,-42 Z" fill="url(#petal10)" stroke="#fff" stroke-width="2.5" transform="rotate(300)"/>
       <path d="M0,-42 C12,-70 28,-95 0,-118 C-28,-95 -12,-70 0,-42 Z" fill="url(#petal11)" stroke="#fff" stroke-width="2.5" transform="rotate(330)"/>
     </g>
-    <!-- Center disc -->
     <circle r="46" fill="#fff" stroke="url(#ring)" stroke-width="3.5"/>
-    <!-- BSC initials -->
-    <text class="initials" x="0" y="14" text-anchor="middle" font-size="40" letter-spacing="-1">
-      <tspan fill="url(#letterB)">B</tspan><tspan fill="url(#letterS)">S</tspan><tspan fill="url(#letterC)">C</tspan>
+    <text class="initials" x="0" y="14" text-anchor="middle" font-size="32" letter-spacing="-1">
+      <tspan fill="url(#letterB)">B</tspan><tspan fill="url(#letterCozy)">C</tspan><tspan fill="url(#letterS)">S</tspan><tspan fill="url(#letterC)">C</tspan>
     </text>
   </g>
 
-  <!-- Brand name -->
-  <text class="brand-name" x="360" y="365" text-anchor="middle" font-size="52" fill="url(#nameGrad)">B's Southern Creations</text>
+  <text class="brand-name" x="360" y="620" text-anchor="middle" font-size="48" fill="url(#nameGrad)">B's Cozy Southern Creations</text>
 </svg>

@@ -1,8 +1,8 @@
-# B's Southern Creations — website
+# B's Cozy Southern Creations — website
 
 Handmade blankets, scarves, hats, and custom knit gifts.
 
-Live address: **bssoutherncreations.com**  
+Live address: **bscozysoutherncreations.com**  
 Shop editor: `/admin/`
 
 ## Preview on this computer
