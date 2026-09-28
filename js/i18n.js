@@ -48,6 +48,8 @@
         letsMake: "Let’s make something",
         sayHello: "Say hello.",
         lang: "Language",
+        menu: "Menu",
+        closeMenu: "Close menu",
       },
       home: {
         headline: "Handmade warmth, southern heart.",
@@ -327,6 +329,8 @@
         letsMake: "Hagamos algo",
         sayHello: "Hola.",
         lang: "Idioma",
+        menu: "Menú",
+        closeMenu: "Cerrar menú",
       },
       home: {
         headline: "Calor hecho a mano, corazón sureño.",
