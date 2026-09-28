@@ -936,10 +936,35 @@
     grid-template-columns: 1fr;
   }
 
+  .page-season .hero {
+    padding: 5rem 0.9rem 5.75rem;
+  }
+
   .page-season .hero-inner,
   .page-season .hero-actions {
     text-align: center;
     justify-content: center;
+  }
+
+  .page-season .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: min(22rem, 100%);
+    margin-inline: auto;
+  }
+
+  .page-season .hero-actions .btn {
+    width: 100%;
+  }
+
+  .season-panel {
+    width: min(100%, 34rem);
+    margin-inline: auto;
+    padding: 1.35rem 1.1rem 1.5rem;
+  }
+
+  .season-title {
+    font-size: clamp(1.7rem, 7vw, 2.35rem);
   }
 
   .o-side-l,
