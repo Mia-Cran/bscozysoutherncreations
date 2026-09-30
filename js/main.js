@@ -210,6 +210,52 @@
     });
   }
 
+  // Mobile menu: a toggle button + Admin link are added to every page's header
+  const siteHeader = document.querySelector(".site-header");
+  const headerEnd = siteHeader && siteHeader.querySelector(".header-end");
+  if (siteHeader && headerEnd && !siteHeader.querySelector(".nav-toggle")) {
+    if (!headerEnd.id) headerEnd.id = "site-menu";
+    const menuBtn = document.createElement("button");
+    menuBtn.type = "button";
+    menuBtn.className = "nav-toggle";
+    menuBtn.setAttribute("aria-controls", headerEnd.id);
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.setAttribute("aria-label", "Menu");
+    menuBtn.innerHTML = '<span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>';
+    siteHeader.appendChild(menuBtn);
+
+    const adminLink = siteHeader.querySelector(".admin-entry");
+    if (adminLink) {
+      const mobileAdmin = document.createElement("a");
+      mobileAdmin.className = "nav-admin";
+      mobileAdmin.href = adminLink.getAttribute("href");
+      mobileAdmin.textContent = adminLink.textContent.trim() || "Admin";
+      headerEnd.appendChild(mobileAdmin);
+    }
+
+    const setMenu = (open) => {
+      siteHeader.classList.toggle("menu-open", open);
+      document.body.classList.toggle("nav-menu-open", open);
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    menuBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setMenu(!siteHeader.classList.contains("menu-open"));
+    });
+    headerEnd.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenu(false));
+    });
+    document.addEventListener("click", (event) => {
+      if (!siteHeader.contains(event.target)) setMenu(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenu(false);
+    });
+    window.matchMedia("(min-width: 761px)").addEventListener("change", (mq) => {
+      if (mq.matches) setMenu(false);
+    });
+  }
+
   const dropdowns = [...document.querySelectorAll(".nav-dropdown")];
 
   const closeDropdown = (dropdown) => {
