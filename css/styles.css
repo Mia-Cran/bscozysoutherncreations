@@ -383,7 +383,7 @@ a {
 }
 
 .hero-logo {
-  width: min(420px, 78vw);
+  width: min(500px, 86vw);
   height: auto;
   margin: 0 auto 1.5rem;
   overflow: visible;
@@ -780,7 +780,7 @@ a {
 }
 
 .hero-solo .hero-logo {
-  width: min(360px, 78vw);
+  width: min(440px, 86vw);
   margin-left: auto;
   margin-right: auto;
 }
