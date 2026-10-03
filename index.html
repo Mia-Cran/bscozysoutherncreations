@@ -29,6 +29,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/chat.css" />
+  <link rel="stylesheet" href="css/feedback.css" />
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 </head>
@@ -265,6 +266,15 @@
       </div>
     </section>
 
+    <section class="section reviews" id="reviews" hidden>
+      <div class="section-inner">
+        <p class="eyebrow">Kind words</p>
+        <h2>What customers say</h2>
+        <div class="reviews-list" id="reviews-list"></div>
+        <p class="reviews-cta"><a class="btn" href="feedback/">Leave a review</a></p>
+      </div>
+    </section>
+
     <section class="section contact" id="contact">
       <div class="section-inner contact-inner">
         <p class="eyebrow" data-text="contact.eyebrow" data-i18n="home.contactEyebrow">Let’s make something</p>
@@ -297,11 +307,13 @@
   <footer class="site-footer">
     <img src="assets/mark.png" alt="" width="48" height="48" />
     <p>B's Cozy Southern Creations</p>
+    <p class="footer-links"><a href="order/">Order &amp; Pay</a> · <a href="feedback/">Leave a review</a></p>
     <p class="fine" data-text="footer.tagline" data-i18n="home.footer">Handmade with care · Blankets, scarves, hats &amp; more</p>
   </footer>
 
   <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/feedback.js"></script>
   <script src="js/chat.js"></script>
 </body>
 </html>

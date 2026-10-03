@@ -212,5 +212,10 @@
         "quote": true
       }
     ]
+  },
+  "reviews": {
+    "_note": "Reviews page is /feedback/. Put B's Google 'write a review' link in googleReviewUrl (leave empty to hide the Google button). To show a review on the homepage, add it to items, e.g. {\"name\":\"Ava\",\"city\":\"Perry\",\"rating\":5,\"item\":\"Blanket\",\"text\":\"So soft!\"}. Only post reviews marked OK to share.",
+    "googleReviewUrl": "",
+    "items": []
   }
 }

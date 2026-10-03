@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Order &amp; Pay | B's Cozy Southern Creations</title>
-  <meta name="description" content="Order handmade blankets, scarves, hats, sets and resin pieces from B's Cozy Southern Creations, then pay securely with PayPal." />
+  <title>Leave a Review | B's Cozy Southern Creations</title>
+  <meta name="description" content="Tell us how you like your handmade blanket, scarf, hat, stocking or resin piece from B's Cozy Southern Creations." />
   <meta name="author" content="B's Cozy Southern Creations" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <link rel="canonical" href="https://bscozysoutherncreations.com/order/" />
+  <link rel="canonical" href="https://bscozysoutherncreations.com/feedback/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -18,7 +18,7 @@
   <link rel="icon" href="../assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
 </head>
-<body class="page-order" data-page="order">
+<body class="page-order page-feedback" data-page="feedback">
   <a class="skip" href="#main" data-i18n="ui.skip">Skip to content</a>
 
   <header class="site-header">
@@ -48,7 +48,7 @@
           <li><a href="../index.html#product-scarves" data-i18n="nav.scarves">Scarves</a></li>
           <li><a href="../index.html#product-hats" data-i18n="nav.hats">Hats &amp; beanies</a></li>
           <li><a href="../index.html#product-sets" data-i18n="nav.sets">Sets &amp; extras</a></li>
-          <li><a href="./" data-i18n="nav.resin">Resin</a></li>
+          <li><a href="../resin/" data-i18n="nav.resin">Resin</a></li>
         </ul>
       </div>
       <div class="nav-dropdown">
@@ -73,8 +73,8 @@
           <li><a href="../seasons/christmas/" data-i18n="nav.christmas">Christmas</a></li>
         </ul>
       </div>
-      <a href="#custom" data-i18n="nav.custom">Custom</a>
-      <a href="#contact" class="nav-cta" data-i18n="nav.hello">Say hello</a>
+      <a href="../index.html#custom" data-i18n="nav.custom">Custom</a>
+      <a href="../index.html#contact" class="nav-cta" data-i18n="nav.hello">Say hello</a>
     </nav>
       <div class="lang-switch" role="group" data-i18n-aria="ui.lang" aria-label="Language">
         <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="true">EN</button>
@@ -86,66 +86,56 @@
   <main id="main" class="order-main">
     <section class="order-intro">
       <img class="order-logo" src="../assets/logo.png" alt="B's Cozy Southern Creations logo" width="1000" height="756" />
-      <h1>Order &amp; Pay</h1>
-      <p>Pick your items, colors and sizes, and we'll add it all up. Every piece is handmade in Middle Georgia.</p>
+      <h1>Leave a Review</h1>
+      <p>Thank you for supporting our small, handmade business! Tell us how you like your piece. It only takes a minute.</p>
     </section>
 
-    <form class="order-form" id="order-form" novalidate>
+    <form class="order-form" id="fb-form" novalidate>
       <fieldset>
-        <legend>1. Your info</legend>
-        <div class="order-two">
-          <label>First name <input type="text" name="first_name" autocomplete="given-name" required /></label>
-          <label>Last name <input type="text" name="last_name" autocomplete="family-name" required /></label>
+        <legend>How did we do?</legend>
+        <div class="fb-stars" id="fb-stars" role="radiogroup" aria-label="Star rating">
+          <label><input type="radio" name="rating" value="5" /><span aria-hidden="true">★</span><span class="sr">5 stars</span></label>
+          <label><input type="radio" name="rating" value="4" /><span aria-hidden="true">★</span><span class="sr">4 stars</span></label>
+          <label><input type="radio" name="rating" value="3" /><span aria-hidden="true">★</span><span class="sr">3 stars</span></label>
+          <label><input type="radio" name="rating" value="2" /><span aria-hidden="true">★</span><span class="sr">2 stars</span></label>
+          <label><input type="radio" name="rating" value="1" /><span aria-hidden="true">★</span><span class="sr">1 star</span></label>
         </div>
-        <label>Email address <input type="email" name="email" autocomplete="email" required /></label>
-        <label>Phone number <input type="tel" name="phone" autocomplete="tel" required /></label>
+        <p class="order-hint fb-stars-text" id="fb-stars-text">Tap a star</p>
       </fieldset>
 
       <fieldset>
-        <legend>2. What would you like?</legend>
-        <p class="order-hint">Add each item, then pick its color (and size for blankets).</p>
-        <div class="order-lines" id="order-lines"></div>
-        <button type="button" class="btn order-add" id="order-add">+ Add another item</button>
-        <label>Notes (names, color ideas, who it's for)
-          <textarea name="details" rows="3" placeholder="Example: add the name &quot;Ava&quot; to the resin keychain"></textarea>
+        <legend>Tell us about it</legend>
+        <label>What did you get?
+          <select name="item" id="fb-item">
+            <option value="">Choose one…</option>
+          </select>
+        </label>
+        <label>Comments (optional)
+          <textarea name="comment" rows="4" placeholder="Example: My granddaughter sleeps with her blanket every night!"></textarea>
         </label>
       </fieldset>
 
       <fieldset>
-        <legend>3. How will you get it?</legend>
-        <div class="order-handoff" id="order-handoff">
-          <label><input type="radio" name="handoff" value="pickup" checked /> Local pickup</label>
-          <label><input type="radio" name="handoff" value="delivery" /> Local delivery (Warner Robins, Macon, Perry, Byron)</label>
-          <label><input type="radio" name="handoff" value="ship" /> Ship it to me</label>
+        <legend>About you</legend>
+        <div class="order-two">
+          <label>First name <input type="text" name="first_name" autocomplete="given-name" required /></label>
+          <label>City (optional) <input type="text" name="city" autocomplete="address-level2" placeholder="Warner Robins" /></label>
         </div>
-        <div class="order-address" id="order-address" hidden>
-          <label>Street address <input type="text" name="address" autocomplete="street-address" /></label>
-          <div class="order-two">
-            <label>City <input type="text" name="city" autocomplete="address-level2" /></label>
-            <label>ZIP <input type="text" name="zip" autocomplete="postal-code" inputmode="numeric" /></label>
-          </div>
-        </div>
+        <label>Email (optional, never shown) <input type="email" name="email" autocomplete="email" /></label>
+        <label class="fb-share"><input type="checkbox" name="ok_to_share" checked /> It's OK to share my review on the website with my first name and city.</label>
       </fieldset>
 
-      <div class="order-totals" id="order-totals" aria-live="polite"></div>
-      <p class="order-error" id="order-error" hidden></p>
-      <button class="btn btn-primary order-submit" type="submit">Send my order</button>
+      <p class="order-error" id="fb-error" hidden></p>
+      <button class="btn btn-primary order-submit" type="submit">Send my review</button>
     </form>
 
-    <section class="order-done" id="order-done" hidden>
-      <h2>Thank you! Your order was sent.</h2>
-      <p id="order-done-text">B will reach out to confirm your colors and pickup.</p>
-      <div class="order-pay" id="order-pay"></div>
-    </section>
-
-    <section class="order-paylater" id="order-paylater">
-      <h2>Already have your price?</h2>
-      <p>If B already sent you a total, pay it here.</p>
-      <div class="order-paylater-row">
-        <label>Amount ($) <input type="number" id="pay-amount" min="1" step="0.01" inputmode="decimal" placeholder="0.00" /></label>
-        <button class="btn btn-primary" type="button" id="pay-amount-btn">Pay with PayPal</button>
+    <section class="order-done" id="fb-done" hidden>
+      <h2>Thank you so much!</h2>
+      <p id="fb-done-text">Your review was sent to B.</p>
+      <div class="fb-google" id="fb-google" hidden>
+        <p>Would you share it on Google too? It helps other families find us.</p>
+        <a class="btn btn-primary" id="fb-google-btn" href="#" target="_blank" rel="noopener">Post it on Google</a>
       </div>
-      <p class="order-hint" id="paypal-missing" hidden>Online payment is being set up. For now, B will send you a payment link.</p>
     </section>
   </main>
 
@@ -158,7 +148,7 @@
 
   <script src="../js/i18n.js"></script>
   <script src="../js/main.js"></script>
-  <script src="../js/order.js"></script>
+  <script src="../js/feedback.js"></script>
   <script src="../js/chat.js"></script>
 </body>
 </html>
