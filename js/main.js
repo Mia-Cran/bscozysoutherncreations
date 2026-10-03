@@ -157,7 +157,7 @@
   };
 
   const page = document.body.dataset.page || "home";
-  const assetRoot = page === "home" ? "" : page === "resin" ? "../" : "../../";
+  const assetRoot = page === "home" ? "" : page === "resin" || page === "order" ? "../" : "../../";
   let inboxEmail = "";
   loadJson(`${assetRoot}content.json`).then((local) => {
     inboxEmail = String(local?.contact?.email || lastContent?.contact?.email || "").trim();

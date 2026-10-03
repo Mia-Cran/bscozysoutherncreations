@@ -113,5 +113,74 @@
   },
   "footer": {
     "tagline": "Handmade with care · Blankets, scarves, hats & more"
+  },
+  "paypal": {
+    "email": "bssoutherncreations24@gmail.com",
+    "note": "PayPal account email. Leave blank to hide online payment."
+  },
+  "orderForm": {
+    "_note": "Prices for the Order & Pay page (/order/). Blankets by size ($45/$65/$85); hats, scarves, stockings $12; set $24. Change a \"price\" here to raise it. Items with \"quote\": true have no price yet (B quotes them). shippingFlat and taxRate are PLACEHOLDERS: confirm taxRate with the Georgia Dept. of Revenue.",
+    "taxRate": 0.08,
+    "shippingFlat": 10,
+    "localDeliveryFee": 0,
+    "colors": [
+      "Pink",
+      "Periwinkle",
+      "Lavender",
+      "Baby blue",
+      "Mint green",
+      "Cream",
+      "White",
+      "Gray",
+      "Red",
+      "Hunter green",
+      "Black",
+      "Other (describe in notes)"
+    ],
+    "items": [
+      {
+        "id": "blanket",
+        "name": "Blanket",
+        "sizes": [
+          {
+            "name": "40 x 60 in",
+            "price": 45
+          },
+          {
+            "name": "50 x 70 in",
+            "price": 65
+          },
+          {
+            "name": "60 x 80 in",
+            "price": 85
+          }
+        ]
+      },
+      {
+        "id": "hat",
+        "name": "Hat or beanie",
+        "price": 12
+      },
+      {
+        "id": "scarf",
+        "name": "Scarf",
+        "price": 12
+      },
+      {
+        "id": "stocking",
+        "name": "Christmas stocking",
+        "price": 12
+      },
+      {
+        "id": "set",
+        "name": "Matching set (hat + scarf)",
+        "price": 24
+      },
+      {
+        "id": "resin",
+        "name": "Resin piece (decor / keepsake)",
+        "quote": true
+      }
+    ]
   }
 }
