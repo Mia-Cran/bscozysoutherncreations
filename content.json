@@ -119,7 +119,7 @@
     "note": "PayPal account email. Leave blank to hide online payment."
   },
   "orderForm": {
-    "_note": "Prices for the Order & Pay page (/order/). Blankets by size ($45/$65/$85); hats, scarves, stockings $12; set $24. Change a \"price\" here to raise it. Items with \"quote\": true have no price yet (B quotes them). shippingFlat and taxRate are PLACEHOLDERS: confirm taxRate with the Georgia Dept. of Revenue.",
+    "_note": "Prices for the Order & Pay page (/order/). Blankets by size ($45/$65/$85); hats, scarves, stockings $12; set $24. Change a \"price\" here to raise it. Items with \"quote\": true have no price yet (B quotes them). shippingFlat and taxRate are PLACEHOLDERS: confirm taxRate with the Georgia Dept. of Revenue. Resin (Coasters, Games, Memories) is quote-only until B sets sizes/prices: add \"sizes\" with \"price\" and remove \"quote\".",
     "taxRate": 0.08,
     "shippingFlat": 10,
     "localDeliveryFee": 0,
@@ -154,31 +154,61 @@
             "name": "60 x 80 in",
             "price": 85
           }
-        ]
+        ],
+        "category": "Knits"
       },
       {
         "id": "hat",
         "name": "Hat or beanie",
-        "price": 12
+        "price": 12,
+        "category": "Knits"
       },
       {
         "id": "scarf",
         "name": "Scarf",
-        "price": 12
+        "price": 12,
+        "category": "Knits"
       },
       {
         "id": "stocking",
         "name": "Christmas stocking",
-        "price": 12
+        "price": 12,
+        "category": "Knits"
       },
       {
         "id": "set",
         "name": "Matching set (hat + scarf)",
-        "price": 24
+        "price": 24,
+        "category": "Knits"
       },
       {
-        "id": "resin",
-        "name": "Resin piece (decor / keepsake)",
+        "id": "coasters",
+        "name": "Coasters",
+        "category": "Resin",
+        "quote": true
+      },
+      {
+        "id": "games",
+        "name": "Games",
+        "category": "Resin",
+        "quote": true,
+        "sizes": [
+          {
+            "name": "Chess"
+          },
+          {
+            "name": "Checkers"
+          },
+          {
+            "name": "Tic-tac-toe"
+          }
+        ],
+        "choosePrompt": "Choose a game…"
+      },
+      {
+        "id": "memories",
+        "name": "Memories (keepsake)",
+        "category": "Resin",
         "quote": true
       }
     ]

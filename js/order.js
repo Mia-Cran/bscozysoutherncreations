@@ -1,7 +1,15 @@
 /* Order & Pay page (/order/).
-   Reads prices, colors, sizes, shipping and tax from content.json -> orderForm,
-   adds everything up, emails the order through FormSubmit (same inbox as the
-   contact form), then offers a PayPal button for the total. */
+   Settings (items, sizes, prices, colors, shipping, tax) come from
+   content.json -> orderForm.
+
+   Two flows:
+   1. Every item has a price  -> customer taps "Continue to PayPal", pays, and
+      PayPal sends them back here (?paid=<order id>). ONLY THEN is the order
+      emailed to B (marked PAID). The order summary is also put into the PayPal
+      payment itself, so B's PayPal email shows what was ordered either way.
+   2. Something needs a quote (e.g. resin without a price yet) -> the request
+      is emailed to B right away, marked "QUOTE REQUEST – NOT PAID". B replies
+      with a price and the customer pays with "Already have your price?". */
 (() => {
   const form = document.getElementById("order-form");
   if (!form) return;
@@ -11,7 +19,9 @@
   const totalsBox = $("order-totals");
   const errorBox = $("order-error");
   const addressBox = $("order-address");
+  const submitBtn = form.querySelector(".order-submit");
   const done = $("order-done");
+  const doneTitle = done.querySelector("h2");
   const doneText = $("order-done-text");
   const payBox = $("order-pay");
   const payAmount = $("pay-amount");
@@ -19,15 +29,34 @@
   const paypalMissing = $("paypal-missing");
 
   let cfg = { inbox: "", paypal: "", taxRate: 0, shippingFlat: 0, localDeliveryFee: 0, colors: [], items: [] };
-  const from = (item) => (item?.startingAt ? "from " : "");
   const money = (n) => `$${(Math.round(n * 100) / 100).toFixed(2)}`;
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const itemById = (id) => cfg.items.find((i) => i.id === id);
-  const basePrice = (i) => i.price || (i.sizes?.length ? Math.min(...i.sizes.map((s) => s.price)) : 0);
-
+  const hasPrice = (p) => typeof p === "number" && p > 0;
+  const pricedSizes = (i) => (i.sizes || []).filter((s) => hasPrice(s.price));
+  const itemLabel = (i) => {
+    if (i.quote || (i.sizes?.length && !pricedSizes(i).length)) return " – price quoted";
+    if (i.sizes?.length) return ` – from ${money(Math.min(...pricedSizes(i).map((s) => s.price)))}`;
+    return hasPrice(i.price) ? ` – ${money(i.price)}` : "";
+  };
   const handoff = () => form.querySelector('input[name="handoff"]:checked')?.value || "pickup";
+  const store = {
+    get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* private mode */ } },
+  };
 
   /* ---------- item lines ---------- */
+  const itemOptions = () => {
+    const groups = {};
+    cfg.items.forEach((i) => { (groups[i.category || "Items"] ||= []).push(i); });
+    return Object.entries(groups)
+      .map(([cat, items]) =>
+        `<optgroup label="${esc(cat)}">${items
+          .map((i) => `<option value="${esc(i.id)}">${esc(i.name)}${itemLabel(i)}</option>`)
+          .join("")}</optgroup>`)
+      .join("");
+  };
+
   const addLine = () => {
     const line = document.createElement("div");
     line.className = "order-line";
@@ -35,7 +64,7 @@
       <label class="order-line-item">Item
         <select data-f="item" required>
           <option value="">Choose an item…</option>
-          ${cfg.items.map((i) => `<option value="${esc(i.id)}">${esc(i.name)}${i.quote ? " – price quoted" : basePrice(i) ? ` – ${i.sizes?.length ? "from " : from(i)}${money(basePrice(i))}` : ""}</option>`).join("")}
+          ${itemOptions()}
         </select>
       </label>
       <label class="order-line-size" hidden>Size
@@ -62,8 +91,10 @@
     itemSel.addEventListener("change", () => {
       const item = itemById(itemSel.value);
       if (item?.sizes?.length) {
-        sizeSel.innerHTML = `<option value="">Choose a size…</option>` +
-          item.sizes.map((s, i) => `<option value="${i}">${esc(s.name)}${` – ${money(s.price)}`}</option>`).join("");
+        sizeSel.innerHTML = `<option value="">${esc(item.choosePrompt || "Choose a size…")}</option>` +
+          item.sizes
+            .map((s, i) => `<option value="${i}">${esc(s.name)} – ${hasPrice(s.price) ? money(s.price) : "price quoted"}</option>`)
+            .join("");
         sizeWrap.hidden = false;
         sizeSel.required = true;
       } else {
@@ -92,142 +123,169 @@
       const item = itemById(line.querySelector('[data-f="item"]').value);
       const sizeIdx = line.querySelector('[data-f="size"]').value;
       const size = item?.sizes && sizeIdx !== "" ? item.sizes[Number(sizeIdx)] : null;
-      const unit = size ? size.price : item?.price || 0;
+      const unit = size ? size.price : item?.price;
       const qty = Math.max(1, parseInt(line.querySelector('[data-f="qty"]').value, 10) || 1);
+      const ready = Boolean(item && (!item.sizes?.length || size));
+      const quote = ready && (item.quote || !hasPrice(unit));
       return {
-        line,
-        item,
-        size,
+        line, item, size, qty, quote, ready,
         color: line.querySelector('[data-f="color"]').value,
-        qty,
-        unit,
-        total: unit * qty,
-        ready: Boolean(item && (!item.sizes?.length || size)),
+        total: ready && !quote ? unit * qty : 0,
       };
     });
 
   /* ---------- totals ---------- */
   const calc = () => {
     const lines = readLines();
-    const subtotal = lines.reduce((s, l) => s + (l.ready ? l.total : 0), 0);
+    const subtotal = lines.reduce((s, l) => s + l.total, 0);
     const mode = handoff();
     const shipping = mode === "ship" ? cfg.shippingFlat : mode === "delivery" ? cfg.localDeliveryFee : 0;
-    const tax = mode === "table" ? 0 : Math.round((subtotal + shipping) * cfg.taxRate * 100) / 100;
+    const tax = Math.round((subtotal + shipping) * cfg.taxRate * 100) / 100;
     const total = subtotal + shipping + tax;
-    const estimate = lines.some((l) => l.ready && (l.item.startingAt || l.item.quote));
-    return { lines, subtotal, shipping, tax, total, mode, estimate };
+    const needsQuote = lines.some((l) => l.quote);
+    return { lines, subtotal, shipping, tax, total, mode, needsQuote };
   };
 
   function update() {
-    const { lines, subtotal, shipping, tax, total, mode, estimate } = calc();
+    const { lines, subtotal, shipping, tax, total, mode, needsQuote } = calc();
     lines.forEach((l) => {
-      l.line.querySelector('[data-f="price"]').textContent = l.ready ? (l.item.quote ? "Price quoted" : `${from(l.item)}${money(l.total)}`) : "";
+      l.line.querySelector('[data-f="price"]').textContent = !l.ready ? "" : l.quote ? "Price quoted" : money(l.total);
     });
-    addressBox.hidden = !(mode === "ship" || mode === "delivery");
-    addressBox.querySelectorAll("input").forEach((i) => (i.required = mode === "ship" || mode === "delivery"));
+    const needsAddress = mode === "ship" || mode === "delivery";
+    addressBox.hidden = !needsAddress;
+    addressBox.querySelectorAll("input").forEach((i) => (i.required = needsAddress));
     syncRemoveButtons();
 
+    submitBtn.textContent = needsQuote
+      ? "Send my request"
+      : subtotal ? `Continue to PayPal – ${money(total)}` : "Continue to PayPal";
+
     if (!subtotal) {
-      totalsBox.innerHTML = estimate ? `<p class="order-hint">B will send you a price quote for your order.</p>` : "";
+      totalsBox.innerHTML = needsQuote ? `<p class="order-hint">B will email you a price for your order. You'll pay after you get it.</p>` : "";
       return;
     }
-    const rows = [[`Items`, money(subtotal)]];
+    const rows = [["Items", money(subtotal)]];
     if (mode === "ship") rows.push(["Shipping", money(shipping)]);
     if (mode === "delivery") rows.push(["Local delivery", shipping ? money(shipping) : "Free"]);
-    if (mode !== "table") rows.push([`Sales tax (${(cfg.taxRate * 100).toFixed(2).replace(/\.?0+$/, "")}%)`, money(tax)]);
+    rows.push([`Sales tax (${(cfg.taxRate * 100).toFixed(2).replace(/\.?0+$/, "")}%)`, money(tax)]);
     totalsBox.innerHTML =
       rows.map(([k, v]) => `<div class="order-row"><span>${k}</span><span>${v}</span></div>`).join("") +
-      `<div class="order-row order-row-total"><span>${estimate ? "Estimated total" : "Total"}</span><span>${estimate ? "from " : ""}${money(total)}</span></div>` +
-      (estimate ? `<p class="order-hint">Some items have starting prices or need a quote. B will confirm your final price before you pay.</p>` : "") +
-      (mode === "table" ? `<p class="order-hint">You'll pay at the vendor table.</p>` : "");
+      `<div class="order-row order-row-total"><span>${needsQuote ? "So far" : "Total"}</span><span>${money(total)}</span></div>` +
+      (needsQuote ? `<p class="order-hint">Some items need a price quote. B will email you the final total, then you can pay.</p>` : "");
   }
 
   form.addEventListener("change", (e) => { if (e.target.name === "handoff") update(); });
   $("order-add").addEventListener("click", () => { addLine(); update(); });
 
-  /* ---------- submit ---------- */
+  /* ---------- building the order ---------- */
   const showError = (msg) => { errorBox.textContent = msg; errorBox.hidden = !msg; };
+  const newOrderId = () => {
+    const d = new Date();
+    const ymd = `${String(d.getFullYear()).slice(2)}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}`;
+    return `BCSC-${ymd}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+  };
+  const lineText = (l) => `${l.qty} x ${l.item.name}${l.size ? ` (${l.size.name})` : ""}, ${l.color} – ${l.quote ? "price to quote" : money(l.total)}`;
+  const shortSummary = (lines) => {
+    const s = lines.map((l) => `${l.qty}x ${l.item.name}${l.size ? ` ${l.size.name}` : ""} ${l.color}`).join("; ");
+    return s.length > 120 ? `${s.slice(0, 117)}...` : s;
+  };
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    showError("");
-    const { lines, subtotal, shipping, tax, total, mode, estimate } = calc();
-    const missing = lines.find((l) => !l.item || !l.color || (l.item.sizes?.length && !l.size));
-    if (missing) return showError("Please choose an item, color (and size for blankets) on every line.");
-    if (!form.reportValidity()) return;
-    if (!cfg.inbox) return showError("Orders can't be sent right now. Please email the shop directly.");
-
+  const buildOrder = () => {
+    const { lines, subtotal, shipping, tax, total, mode, needsQuote } = calc();
     const f = form.elements;
-    const name = `${f.first_name.value.trim()} ${f.last_name.value.trim()}`;
-    const modeLabel = { table: "Buying at the vendor table", pickup: "Local pickup", delivery: "Local delivery", ship: "Ship to customer" }[mode];
-    const payload = {
-      _subject: `New order from ${name} – ${estimate ? "est. from " : ""}${money(total)}`,
-      _template: "table",
-      _captcha: "false",
-      first_name: f.first_name.value.trim(),
-      last_name: f.last_name.value.trim(),
-      email: f.email.value.trim(),
-      phone: f.phone.value.trim(),
-      items: lines
-        .map((l) => `${l.qty} x ${l.item.name}${l.size ? ` (${l.size.name})` : ""}, ${l.color} – ${l.item.quote ? "price to quote" : `${from(l.item)}${money(l.total)}`}`)
-        .join(" | "),
-      notes: f.details.value.trim(),
-      how_they_get_it: modeLabel,
-      address: mode === "ship" || mode === "delivery" ? `${f.address.value.trim()}, ${f.city.value.trim()} ${f.zip.value.trim()}` : "",
-      subtotal: money(subtotal),
-      shipping_or_delivery: money(shipping),
-      sales_tax: money(tax),
-      total: estimate ? `Estimate from ${money(total)} (starting prices, confirm final price with customer)` : money(total),
+    const modeLabel = { pickup: "Local pickup", delivery: "Local delivery", ship: "Ship to customer" }[mode];
+    return {
+      id: newOrderId(),
+      needsQuote,
+      total,
+      summary: shortSummary(lines),
+      fields: {
+        first_name: f.first_name.value.trim(),
+        last_name: f.last_name.value.trim(),
+        email: f.email.value.trim(),
+        phone: f.phone.value.trim(),
+        items: lines.map(lineText).join(" | "),
+        notes: f.details.value.trim(),
+        how_they_get_it: modeLabel,
+        address: mode === "ship" || mode === "delivery" ? `${f.address.value.trim()}, ${f.city.value.trim()} ${f.zip.value.trim()}` : "",
+        subtotal: money(subtotal),
+        shipping_or_delivery: money(shipping),
+        sales_tax: money(tax),
+        total: needsQuote ? `${money(total)} so far + items to quote` : money(total),
+      },
     };
+  };
 
-    const btn = form.querySelector(".order-submit");
-    btn.disabled = true;
-    btn.textContent = "Sending…";
-    let ok = false;
+  const emailOrder = async (order, subject, extra = {}) => {
     try {
       const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(cfg.inbox)}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ _subject: subject, _template: "table", _captcha: "false", order_number: order.id, ...extra, ...order.fields }),
       });
-      ok = res.ok;
+      return res.ok;
     } catch (e) {
-      ok = false;
+      return false;
     }
-    btn.disabled = false;
-    btn.textContent = "Send my order";
-    if (!ok) return showError("That didn't send. Please try again, or email the shop directly.");
+  };
 
+  const showDone = (title, text) => {
     form.hidden = true;
     done.hidden = false;
+    doneTitle.textContent = title;
+    doneText.textContent = text;
     payBox.innerHTML = "";
-    if (estimate) {
-      doneText.textContent = `Your estimate starts at ${money(total)}. B will contact you with your final price. Then you can pay with PayPal below${mode === "table" ? " or at the vendor table" : ""}.`;
-    } else if (mode === "table") {
-      doneText.textContent = `Your total is ${money(total)}. Please pay at the vendor table.`;
-    } else if (cfg.paypal) {
-      doneText.textContent = `Your total is ${money(total)}. Pay now with PayPal to lock in your order.`;
-      const a = document.createElement("a");
-      a.className = "btn btn-primary paypal-btn";
-      a.href = paypalUrl(total, `Order for ${name}`);
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.textContent = `Pay ${money(total)} with PayPal`;
-      payBox.appendChild(a);
-    } else {
-      doneText.textContent = `Your total is ${money(total)}. B will send you a payment link to finish your order.`;
-    }
     done.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  /* ---------- submit ---------- */
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    showError("");
+    const { lines } = calc();
+    if (lines.some((l) => !l.item || !l.color || (l.item.sizes?.length && !l.size))) {
+      return showError("Please choose an item, size (if it has one) and color on every line.");
+    }
+    if (!form.reportValidity()) return;
+    if (!cfg.inbox) return showError("Orders can't be sent right now. Please email the shop directly.");
+
+    const order = buildOrder();
+    const name = `${order.fields.first_name} ${order.fields.last_name}`;
+
+    // Quote requests go to B right away, clearly marked as not paid.
+    if (order.needsQuote) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+      const ok = await emailOrder(order, `QUOTE REQUEST – NOT PAID – ${name}`, { payment_status: "NOT PAID – needs a price quote" });
+      submitBtn.disabled = false;
+      update();
+      if (!ok) return showError("That didn't send. Please try again, or email the shop directly.");
+      return showDone("Thank you! Your request was sent.", "B will email you a price. When you get it, you can pay with PayPal below.");
+    }
+
+    // Priced orders: pay first. The order is emailed to B after PayPal sends the customer back.
+    if (!cfg.paypal) return showError("Online payment isn't set up yet. Please email the shop to order.");
+    store.set(`bcsc-order-${order.id}`, { order, sent: false });
+    const back = `${location.origin}${location.pathname}`;
+    location.href = paypalUrl(order.total, `Order ${order.id}: ${order.summary}`, {
+      invoice: order.id,
+      custom: order.id,
+      return: `${back}?paid=${encodeURIComponent(order.id)}`,
+      cancel_return: `${back}?canceled=${encodeURIComponent(order.id)}`,
+      rm: "1",
+    });
   });
 
   /* ---------- PayPal ---------- */
-  function paypalUrl(amount, label) {
+  function paypalUrl(amount, label, extra = {}) {
     const params = new URLSearchParams({
       cmd: "_xclick",
       business: cfg.paypal,
-      item_name: label || "B's Cozy Southern Creations order",
+      item_name: (label || "B's Cozy Southern Creations order").slice(0, 127),
       currency_code: "USD",
       no_shipping: "1",
+      charset: "utf-8",
+      ...extra,
     });
     if (amount > 0) params.set("amount", amount.toFixed(2));
     return `https://www.paypal.com/cgi-bin/webscr?${params.toString()}`;
@@ -236,8 +294,33 @@
   payAmountBtn?.addEventListener("click", () => {
     if (!cfg.paypal) { paypalMissing.hidden = false; return; }
     const amt = parseFloat(payAmount.value);
-    window.open(paypalUrl(amt > 0 ? amt : 0), "_blank", "noopener");
+    window.open(paypalUrl(amt > 0 ? amt : 0, "B's Cozy Southern Creations – quoted order"), "_blank", "noopener");
   });
+
+  /* ---------- coming back from PayPal ---------- */
+  const handleReturn = async () => {
+    const params = new URLSearchParams(location.search);
+    const paidId = params.get("paid");
+    const canceledId = params.get("canceled");
+    if (canceledId) {
+      showError("Your payment was canceled, so your order was not sent. You can try again below.");
+      return;
+    }
+    if (!paidId) return;
+    const saved = store.get(`bcsc-order-${paidId}`);
+    if (!saved) {
+      showDone("Thank you for your payment!", `Your order number is ${paidId}. B has your order details from PayPal and will be in touch.`);
+      return;
+    }
+    if (!saved.sent) {
+      const name = `${saved.order.fields.first_name} ${saved.order.fields.last_name}`;
+      const ok = await emailOrder(saved.order, `PAID ORDER – ${name} – ${money(saved.order.total)}`, {
+        payment_status: "PAID with PayPal (confirm the payment in PayPal)",
+      });
+      if (ok) store.set(`bcsc-order-${paidId}`, { ...saved, sent: true });
+    }
+    showDone("Thank you! Your order is paid.", `Your order number is ${paidId}. B will reach out about pickup, delivery or shipping.`);
+  };
 
   /* ---------- load settings ---------- */
   fetch("../content.json", { cache: "no-store" })
@@ -257,5 +340,6 @@
       addLine();
       update();
       if (!cfg.paypal) paypalMissing.hidden = false;
+      handleReturn();
     });
 })();
