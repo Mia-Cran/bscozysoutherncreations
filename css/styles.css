@@ -425,7 +425,7 @@ a {
 }
 
 .hero-logo {
-  width: min(420px, 78vw);
+  width: min(500px, 86vw);
   height: auto;
   margin: 0 auto 1.5rem;
   overflow: visible;
@@ -569,6 +569,22 @@ a {
 .product .price {
   margin: 0.4rem 0 0;
   font-size: 1.25rem;
+}
+
+.size {
+  margin: 0.15rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.featured-copy .size {
+  margin: -0.85rem 0 1.15rem;
+}
+
+.product .size {
+  margin: 0.15rem 0 0;
 }
 
 .shop,
@@ -835,7 +851,7 @@ a {
 }
 
 .hero-solo .hero-logo {
-  width: min(360px, 78vw);
+  width: min(440px, 86vw);
   margin-left: auto;
   margin-right: auto;
 }

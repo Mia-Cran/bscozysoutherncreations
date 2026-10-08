@@ -169,7 +169,7 @@
   root.innerHTML = `
     <div class="bsc-chat-panel" hidden>
       <div class="bsc-chat-head">
-        <img src="${assetRoot}assets/mark.svg" alt="" width="34" height="34" />
+        <img src="${assetRoot}assets/mark.png" alt="" width="34" height="34" />
         <p>
           <strong></strong>
           <span></span>

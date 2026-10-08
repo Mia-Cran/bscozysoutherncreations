@@ -19,9 +19,10 @@
     "eyebrow": "In the shop now",
     "title": "Pink and periwinkle chenille.",
     "text": "Soft bobble stitches in pastel pink and lilac — a handmade throw with the texture you can see from across the room.",
-    "image": "assets/products/blanket-blue-white-stripes.jpg",
-    "alt": "Handmade royal blue and white chunky chenille throw",
+    "image": "assets/products/featured-blanket.jpg",
+    "alt": "Handmade pink and periwinkle chenille blanket on cream linen",
     "price": "$45",
+    "size": "40 x 60",
     "cta": "Request this piece",
     "buyUrl": ""
   },
@@ -33,6 +34,7 @@
       "image": "assets/products/blanket-blue-white-stripes.jpg",
       "alt": "Handmade royal blue and white chunky chenille throw",
       "price": "$45",
+      "size": "40 x 60",
       "buyUrl": ""
     },
     {
@@ -80,6 +82,7 @@
       "image": "assets/products/blanket-blue-white-stripes.jpg",
       "alt": "Handmade royal blue and white striped chunky throw",
       "price": "$45",
+      "size": "40 x 60",
       "buyUrl": ""
     },
     {
@@ -89,6 +92,7 @@
       "image": "assets/products/blanket-blue-white-panel.jpg",
       "alt": "Handmade royal blue throw with a wide white center panel",
       "price": "$45",
+      "size": "40 x 60",
       "buyUrl": ""
     },
     {
@@ -98,6 +102,7 @@
       "image": "assets/products/blanket-blue-white-bands.jpg",
       "alt": "Handmade royal blue and white wide-band chunky throw",
       "price": "$45",
+      "size": "40 x 60",
       "buyUrl": ""
     },
     {
@@ -107,6 +112,7 @@
       "image": "assets/products/blanket-blue-taupe.jpg",
       "alt": "Handmade blue chunky throw with a taupe center stripe",
       "price": "$45",
+      "size": "40 x 60",
       "buyUrl": ""
     },
     {
@@ -214,5 +220,109 @@
   },
   "footer": {
     "tagline": "Handmade with care · Blankets, scarves, hats & more"
+  },
+  "paypal": {
+    "email": "bssoutherncreations24@gmail.com",
+    "note": "PayPal account email. Leave blank to hide online payment."
+  },
+  "orderForm": {
+    "_note": "Prices for the Order & Pay page (/order/). Blankets by size ($45/$65/$85); hats, scarves, stockings $12; set $24. Change a \"price\" here to raise it. Items with \"quote\": true have no price yet (B quotes them). shippingFlat and taxRate are PLACEHOLDERS: confirm taxRate with the Georgia Dept. of Revenue. Resin (Coasters, Games, Memories) is quote-only until B sets sizes/prices: add \"sizes\" with \"price\" and remove \"quote\".",
+    "taxRate": 0.08,
+    "shippingFlat": 10,
+    "localDeliveryFee": 0,
+    "colors": [
+      "Pink",
+      "Periwinkle",
+      "Lavender",
+      "Baby blue",
+      "Mint green",
+      "Cream",
+      "White",
+      "Gray",
+      "Red",
+      "Hunter green",
+      "Black",
+      "Other (describe in notes)"
+    ],
+    "items": [
+      {
+        "id": "blanket",
+        "name": "Blanket",
+        "sizes": [
+          {
+            "name": "40 x 60 in",
+            "price": 45
+          },
+          {
+            "name": "50 x 70 in",
+            "price": 65
+          },
+          {
+            "name": "60 x 80 in",
+            "price": 85
+          }
+        ],
+        "category": "Knits"
+      },
+      {
+        "id": "hat",
+        "name": "Hat or beanie",
+        "price": 12,
+        "category": "Knits"
+      },
+      {
+        "id": "scarf",
+        "name": "Scarf",
+        "price": 12,
+        "category": "Knits"
+      },
+      {
+        "id": "stocking",
+        "name": "Christmas stocking",
+        "price": 12,
+        "category": "Knits"
+      },
+      {
+        "id": "set",
+        "name": "Matching set (hat + scarf)",
+        "price": 24,
+        "category": "Knits"
+      },
+      {
+        "id": "coasters",
+        "name": "Coasters",
+        "category": "Resin",
+        "quote": true
+      },
+      {
+        "id": "games",
+        "name": "Games",
+        "category": "Resin",
+        "quote": true,
+        "sizes": [
+          {
+            "name": "Chess"
+          },
+          {
+            "name": "Checkers"
+          },
+          {
+            "name": "Tic-tac-toe"
+          }
+        ],
+        "choosePrompt": "Choose a game…"
+      },
+      {
+        "id": "memories",
+        "name": "Memories (keepsake)",
+        "category": "Resin",
+        "quote": true
+      }
+    ]
+  },
+  "reviews": {
+    "_note": "Reviews page is /feedback/. Put B's Google 'write a review' link in googleReviewUrl (leave empty to hide the Google button). To show a review on the homepage, add it to items, e.g. {\"name\":\"Ava\",\"city\":\"Perry\",\"rating\":5,\"item\":\"Blanket\",\"text\":\"So soft!\"}. Only post reviews marked OK to share.",
+    "googleReviewUrl": "",
+    "items": []
   }
 }
