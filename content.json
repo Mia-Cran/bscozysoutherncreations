@@ -19,9 +19,9 @@
     "eyebrow": "In the shop now",
     "title": "Pink and periwinkle chenille.",
     "text": "Soft bobble stitches in pastel pink and lilac — a handmade throw with the texture you can see from across the room.",
-    "image": "assets/products/featured-blanket.jpg",
-    "alt": "Handmade pink and periwinkle chenille blanket on cream linen",
-    "price": "",
+    "image": "assets/products/blanket-blue-white-stripes.jpg",
+    "alt": "Handmade royal blue and white chunky chenille throw",
+    "price": "$45",
     "cta": "Request this piece",
     "buyUrl": ""
   },
@@ -30,18 +30,18 @@
       "id": "blankets",
       "title": "Blankets & throws",
       "text": "Chunky, cozy, and made for couch nights and nursery nooks.",
-      "image": "assets/products/featured-blanket.jpg",
-      "alt": "Handmade pink and periwinkle chenille throw blanket",
-      "price": "",
+      "image": "assets/products/blanket-blue-white-stripes.jpg",
+      "alt": "Handmade royal blue and white chunky chenille throw",
+      "price": "$45",
       "buyUrl": ""
     },
     {
       "id": "scarves",
       "title": "Scarves",
       "text": "Soft wraps in southern pastel colors for everyday warmth.",
-      "image": "assets/products/scarf.jpg",
-      "alt": "Handmade pastel knit scarf draped on linen",
-      "price": "",
+      "image": "assets/products/scarf-terracotta.jpg",
+      "alt": "Handmade terracotta chunky chenille scarf",
+      "price": "$15",
       "buyUrl": ""
     },
     {
@@ -73,6 +73,60 @@
     }
   ],
   "readyNow": [
+    {
+      "id": "blanket-stripes",
+      "title": "Blue & white stripe throw",
+      "text": "Chunky chenille in royal blue and cream — a couch-ready handmade throw.",
+      "image": "assets/products/blanket-blue-white-stripes.jpg",
+      "alt": "Handmade royal blue and white striped chunky throw",
+      "price": "$45",
+      "buyUrl": ""
+    },
+    {
+      "id": "blanket-panel",
+      "title": "Blue & white panel throw",
+      "text": "A wide cream panel framed in royal blue, stitched in plush chenille.",
+      "image": "assets/products/blanket-blue-white-panel.jpg",
+      "alt": "Handmade royal blue throw with a wide white center panel",
+      "price": "$45",
+      "buyUrl": ""
+    },
+    {
+      "id": "blanket-bands",
+      "title": "Blue & white banded throw",
+      "text": "Wide royal blue and cream bands in soft, squishy chenille.",
+      "image": "assets/products/blanket-blue-white-bands.jpg",
+      "alt": "Handmade royal blue and white wide-band chunky throw",
+      "price": "$45",
+      "buyUrl": ""
+    },
+    {
+      "id": "blanket-taupe",
+      "title": "Blue & taupe stripe throw",
+      "text": "Periwinkle chenille with a single taupe stripe down the middle.",
+      "image": "assets/products/blanket-blue-taupe.jpg",
+      "alt": "Handmade blue chunky throw with a taupe center stripe",
+      "price": "$45",
+      "buyUrl": ""
+    },
+    {
+      "id": "scarf-terracotta",
+      "title": "Terracotta chenille scarf",
+      "text": "A soft dusty-rose wrap in chunky handmade chenille.",
+      "image": "assets/products/scarf-terracotta.jpg",
+      "alt": "Handmade terracotta chunky chenille scarf rolled and ready",
+      "price": "$15",
+      "buyUrl": ""
+    },
+    {
+      "id": "scarf-mustard",
+      "title": "Mustard chenille scarf",
+      "text": "A warm gold wrap in squishy handmade chenille.",
+      "image": "assets/products/scarf-mustard.jpg",
+      "alt": "Handmade mustard yellow chunky chenille scarf rolled and ready",
+      "price": "$15",
+      "buyUrl": ""
+    },
     {
       "id": "fall-wreath",
       "title": "Monogram fall wreath",

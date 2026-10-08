@@ -74,6 +74,12 @@
       pumpkins: ["home.pumpkinsTitle", "home.pumpkinsText"],
       "fall-bouquet": ["home.fallBouquetTitle", "home.fallBouquetText"],
       "christmas-wreath": ["home.christmasWreathTitle", "home.christmasWreathText"],
+      "blanket-stripes": ["home.blanketStripesTitle", "home.blanketStripesText"],
+      "blanket-panel": ["home.blanketPanelTitle", "home.blanketPanelText"],
+      "blanket-bands": ["home.blanketBandsTitle", "home.blanketBandsText"],
+      "blanket-taupe": ["home.blanketTaupeTitle", "home.blanketTaupeText"],
+      "scarf-terracotta": ["home.scarfTerracottaTitle", "home.scarfTerracottaText"],
+      "scarf-mustard": ["home.scarfMustardTitle", "home.scarfMustardText"],
     };
 
     const applyPrice = (id, price) => {
@@ -156,7 +162,7 @@
   ]).then(([remote, local]) => {
     const content =
       remote?.featured && Array.isArray(remote.products) ? remote : local;
-    if (content && Array.isArray(local?.readyNow) && !Array.isArray(content.readyNow)) {
+    if (content && Array.isArray(local?.readyNow) && local.readyNow.length) {
       content.readyNow = local.readyNow;
     }
     if (content) {

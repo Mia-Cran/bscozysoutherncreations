@@ -543,7 +543,7 @@ a {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: contain;
-  background: #f3eee6;
+  background: #2b2a28;
   border-radius: 10px;
   box-shadow: 0 22px 52px rgba(44, 53, 48, 0.14);
 }
@@ -583,8 +583,8 @@ a {
   aspect-ratio: 1 / 1;
   object-fit: contain;
   object-position: center;
-  background: #f4eee6;
-  padding: 0.7rem;
+  background: #2b2a28;
+  padding: 0.55rem;
   border-radius: 10px;
 }
 
