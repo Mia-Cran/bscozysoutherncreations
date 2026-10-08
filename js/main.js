@@ -69,6 +69,11 @@
       hats: ["home.hatsTitle", "home.hatsText"],
       sets: ["home.setsTitle", "home.setsText"],
       resin: ["home.resinTitle", "home.resinText"],
+      "fall-wreath": ["home.fallWreathTitle", "home.fallWreathText"],
+      "halloween-wreath": ["home.halloweenWreathTitle", "home.halloweenWreathText"],
+      pumpkins: ["home.pumpkinsTitle", "home.pumpkinsText"],
+      "fall-bouquet": ["home.fallBouquetTitle", "home.fallBouquetText"],
+      "christmas-wreath": ["home.christmasWreathTitle", "home.christmasWreathText"],
     };
 
     const applyPrice = (id, price) => {
@@ -90,22 +95,19 @@
       });
     }
 
-    const grid = document.querySelector("[data-product-grid]");
-    if (grid) {
-      grid.innerHTML = products
-        .map((product) => {
-          const price = String(product.price || "").trim();
-          const image = product.image || "assets/products/blanket.jpg";
-          const copyKeys = productCopy[product.id] || [];
-          const titleAttr = copyKeys[0] ? ` data-i18n="${copyKeys[0]}"` : "";
-          const textAttr = copyKeys[1] ? ` data-i18n="${copyKeys[1]}"` : "";
-          const isResin = product.id === "resin";
-          const buyHref = isResin ? "resin/" : "#contact";
-          const buyLabel = isResin ? "See what we pour" : "Request this piece";
-          const buyI18n = isResin ? ` data-i18n="ui.seePour"` : "";
-          return `
+    const productMarkup = (product) => {
+      const price = String(product.price || "").trim();
+      const image = product.image || "assets/products/blanket.jpg";
+      const copyKeys = productCopy[product.id] || [];
+      const titleAttr = copyKeys[0] ? ` data-i18n="${copyKeys[0]}"` : "";
+      const textAttr = copyKeys[1] ? ` data-i18n="${copyKeys[1]}"` : "";
+      const isResin = product.id === "resin";
+      const buyHref = isResin ? "resin/" : "#contact";
+      const buyLabel = isResin ? "See what we pour" : "Request this piece";
+      const buyI18n = isResin ? ` data-i18n="ui.seePour"` : ` data-i18n="ui.requestPiece"`;
+      return `
             <figure class="product is-in" id="product-${escapeHtml(product.id)}">
-              <img src="${escapeHtml(image)}" alt="${escapeHtml(product.alt || product.title)}" width="800" height="600" loading="lazy" />
+              <img src="${escapeHtml(image)}" alt="${escapeHtml(product.alt || product.title)}" width="800" height="800" loading="lazy" />
               <figcaption>
                 <h3${titleAttr}>${escapeHtml(product.title)}</h3>
                 <p${textAttr}>${escapeHtml(product.text)}</p>
@@ -116,13 +118,22 @@
               </figcaption>
             </figure>
           `;
-        })
-        .join("");
+    };
+
+    const grid = document.querySelector("[data-product-grid]");
+    if (grid) {
+      grid.innerHTML = products.map(productMarkup).join("");
+    }
+
+    const readyGrid = document.querySelector("[data-ready-grid]");
+    const readyNow = Array.isArray(content.readyNow) ? content.readyNow : [];
+    if (readyGrid && readyNow.length) {
+      readyGrid.innerHTML = readyNow.map(productMarkup).join("");
     }
 
     applyBuy("featured", content.featured?.buyUrl, content.featured?.cta);
     applyPrice("featured", content.featured?.price);
-    products.forEach((product) => {
+    [...products, ...readyNow].forEach((product) => {
       applyBuy(product.id, product.buyUrl);
       applyPrice(product.id, product.price);
     });
@@ -145,6 +156,9 @@
   ]).then(([remote, local]) => {
     const content =
       remote?.featured && Array.isArray(remote.products) ? remote : local;
+    if (content && Array.isArray(local?.readyNow) && !Array.isArray(content.readyNow)) {
+      content.readyNow = local.readyNow;
+    }
     if (content) {
       lastContent = content;
       applyContent(content);

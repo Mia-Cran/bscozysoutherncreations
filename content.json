@@ -72,6 +72,53 @@
       "buyUrl": ""
     }
   ],
+  "readyNow": [
+    {
+      "id": "fall-wreath",
+      "title": "Monogram fall wreath",
+      "text": "Glitter tulle, maple leaves, and a wooden letter T — handmade for the front door.",
+      "image": "assets/products/fall-t-wreath.jpg",
+      "alt": "Handmade orange tulle fall wreath with maple leaves and a wooden letter T",
+      "price": "$25",
+      "buyUrl": ""
+    },
+    {
+      "id": "halloween-wreath",
+      "title": "EEK! Halloween wreath",
+      "text": "Tinsel, a glitter spider, eyeballs, and a sparkly bat — a playful porch piece.",
+      "image": "assets/products/halloween-eek-wreath.jpg",
+      "alt": "Handmade Halloween wreath with tinsel, a purple spider, and orange EEK letters",
+      "price": "$25",
+      "buyUrl": ""
+    },
+    {
+      "id": "pumpkins",
+      "title": "Stacked pumpkin trio",
+      "text": "Three white jack-o’-lanterns with gold faces and a crown of autumn leaves.",
+      "image": "assets/products/stacked-pumpkins.jpg",
+      "alt": "Stacked white jack-o’-lanterns with gold faces and autumn leaves",
+      "price": "$40 for 3",
+      "buyUrl": ""
+    },
+    {
+      "id": "fall-bouquet",
+      "title": "Fall bouquet",
+      "text": "Harvest stems, eucalyptus, and pinecones in a mason jar — ready for the table.",
+      "image": "assets/products/fall-bouquet.jpg",
+      "alt": "Handmade fall bouquet in a mason jar with pinecones and autumn foliage",
+      "price": "$55",
+      "buyUrl": ""
+    },
+    {
+      "id": "christmas-wreath",
+      "title": "Gnome Christmas wreath",
+      "text": "Red-and-white pom-poms, candy canes, and two cozy gnomes for the door.",
+      "image": "assets/products/christmas-gnome-wreath.jpg",
+      "alt": "Handmade red and white pom-pom Christmas wreath with two knitted gnomes",
+      "price": "$25",
+      "buyUrl": ""
+    }
+  ],
   "creations": {
     "eyebrow": "What we make",
     "title": "Little treasures with a homemade soul.",

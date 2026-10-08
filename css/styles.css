@@ -571,10 +571,21 @@ a {
   font-size: 1.25rem;
 }
 
-.shop {
+.shop,
+.ready-now {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 25%),
     var(--paper);
+}
+
+.ready-grid .product img,
+.season-products .product img {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  object-position: center;
+  background: #f4eee6;
+  padding: 0.7rem;
+  border-radius: 10px;
 }
 
 .product-grid {
