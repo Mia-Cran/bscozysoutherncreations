@@ -177,6 +177,15 @@
     if (content && Array.isArray(local?.readyNow) && local.readyNow.length) {
       content.readyNow = local.readyNow;
     }
+    if (content?.featured && local?.featured?.size) {
+      content.featured.size = local.featured.size;
+    }
+    if (Array.isArray(content?.products) && Array.isArray(local?.products)) {
+      content.products = content.products.map((product) => {
+        const localProduct = local.products.find((item) => item.id === product.id);
+        return localProduct?.size ? { ...product, size: localProduct.size } : product;
+      });
+    }
     if (content) {
       lastContent = content;
       applyContent(content);
