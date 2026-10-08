@@ -581,10 +581,11 @@ a {
 .ready-grid .product img,
 .season-products .product img {
   aspect-ratio: 1 / 1;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   background: #f3eee6;
   border-radius: 10px;
+  padding: 0.7rem;
 }
 
 .product-grid {
@@ -609,7 +610,9 @@ a {
 .product img {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  background: #f3eee6;
   border-radius: 2px;
 }
 
