@@ -211,23 +211,12 @@
   gap: 1.1rem;
 }
 
-.season-products {
-  margin: 0.35rem 0 0;
+.season-shop-link {
+  margin: 0 0 1.75rem;
 }
 
-.season-products:has(.product:only-child) {
-  grid-template-columns: minmax(0, 22rem);
-  justify-content: center;
-}
-
-.page-season .product {
-  opacity: 1;
-  transform: none;
-}
-
-.page-season .product figcaption {
-  padding-left: 0;
-  padding-right: 0;
+.season-shop-link .btn {
+  display: inline-flex;
 }
 
 .season-card {
@@ -666,22 +655,6 @@
 .season-halloween .season-card {
   background: rgba(255, 244, 228, 0.08);
   border-color: rgba(224, 138, 60, 0.22);
-}
-
-.season-halloween .product h3 {
-  color: #f8eedc;
-}
-
-.season-halloween .product p {
-  color: rgba(244, 232, 216, 0.78);
-}
-
-.season-halloween .product .price {
-  color: #e08a3c;
-}
-
-.season-halloween .product img {
-  background: #241532;
 }
 
 .season-halloween .eyebrow,
