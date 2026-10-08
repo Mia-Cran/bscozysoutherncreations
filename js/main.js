@@ -49,9 +49,16 @@
       if (!button) return;
       if (buyUrl) {
         button.href = buyUrl;
-        button.target = "_blank";
-        button.rel = "noopener noreferrer";
-        button.textContent = "Buy";
+        const isExternal = /^https?:/i.test(buyUrl);
+        if (isExternal) {
+          button.target = "_blank";
+          button.rel = "noopener noreferrer";
+          button.textContent = label || "Buy";
+        } else {
+          button.removeAttribute("target");
+          button.removeAttribute("rel");
+          button.textContent = label || "See these pieces";
+        }
       } else if (id === "resin") {
         button.href = "resin/";
         button.removeAttribute("target");
@@ -117,9 +124,14 @@
       const titleAttr = copyKeys[0] ? ` data-i18n="${copyKeys[0]}"` : "";
       const textAttr = copyKeys[1] ? ` data-i18n="${copyKeys[1]}"` : "";
       const isResin = product.id === "resin";
-      const buyHref = isResin ? "resin/" : "#contact";
-      const buyLabel = isResin ? "See what we pour" : "Request this piece";
-      const buyI18n = isResin ? ` data-i18n="ui.seePour"` : ` data-i18n="ui.requestPiece"`;
+      const buyHref = product.buyUrl || (isResin ? "resin/" : "#contact");
+      const buyLabel = product.cta || (isResin ? "See what we pour" : "Request this piece");
+      const isExternal = /^https?:/i.test(buyHref);
+      const buyI18n = product.cta
+        ? ""
+        : isResin
+          ? ` data-i18n="ui.seePour"`
+          : ` data-i18n="ui.requestPiece"`;
       return `
             <figure class="product is-in" id="product-${escapeHtml(product.id)}">
               <img src="${escapeHtml(image)}" alt="${escapeHtml(product.alt || product.title)}" width="800" height="800" loading="lazy" />
@@ -129,7 +141,7 @@
                 <p class="price"${price ? "" : " hidden"}>${escapeHtml(price)}</p>
                 <p class="size"${size ? "" : " hidden"}>${escapeHtml(size)}</p>
                 <div class="product-actions">
-                  <a class="btn btn-primary" data-buy="${escapeHtml(product.id)}" href="${buyHref}"${buyI18n}>${buyLabel}</a>
+                  <a class="btn btn-primary" data-buy="${escapeHtml(product.id)}" href="${escapeHtml(buyHref)}"${isExternal ? ` target="_blank" rel="noopener noreferrer"` : ""}${buyI18n}>${escapeHtml(buyLabel)}</a>
                 </div>
               </figcaption>
             </figure>
@@ -151,7 +163,7 @@
     applyPrice("featured", content.featured?.price);
     applySize("featured", content.featured?.size);
     [...products, ...readyNow].forEach((product) => {
-      applyBuy(product.id, product.buyUrl);
+      applyBuy(product.id, product.buyUrl, product.cta);
       applyPrice(product.id, product.price);
       applySize(product.id, product.size);
     });

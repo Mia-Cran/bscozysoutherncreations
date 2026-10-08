@@ -35,7 +35,8 @@
       "alt": "Handmade royal blue and white chunky chenille throw",
       "price": "$45",
       "size": "40 x 60",
-      "buyUrl": ""
+      "buyUrl": "#product-blanket-stripes",
+      "cta": "See the throws"
     },
     {
       "id": "scarves",
@@ -44,7 +45,8 @@
       "image": "assets/products/scarf-terracotta.jpg",
       "alt": "Handmade terracotta chunky chenille scarf",
       "price": "$15",
-      "buyUrl": ""
+      "buyUrl": "#product-scarf-terracotta",
+      "cta": "See the scarves"
     },
     {
       "id": "hats",
