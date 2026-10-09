@@ -210,7 +210,8 @@
   };
 
   const page = document.body.dataset.page || "home";
-  const assetRoot = page === "home" ? "" : page === "resin" || page === "order" || page === "feedback" ? "../" : "../../";
+  const oneUpPages = ["resin", "order", "feedback", "blankets", "scarves", "hats", "sets", "decor"];
+  const assetRoot = page === "home" ? "" : oneUpPages.includes(page) ? "../" : "../../";
   let inboxEmail = "";
   loadJson(`${assetRoot}content.json`).then((local) => {
     inboxEmail = String(local?.contact?.email || lastContent?.contact?.email || "").trim();
