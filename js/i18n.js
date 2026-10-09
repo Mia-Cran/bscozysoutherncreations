@@ -33,6 +33,7 @@
         browse: "Browse the goods",
         requestCustom: "Request a custom piece",
         requestPiece: "Request this piece",
+        shopNow: "Shop now",
         buy: "Buy",
         seeSeason: "See this season",
         seeShop: "See the shop",
@@ -312,6 +313,7 @@
         browse: "Ver la tienda",
         requestCustom: "Pedir una pieza a medida",
         requestPiece: "Pedir esta pieza",
+        shopNow: "Ver todo",
         buy: "Comprar",
         seeSeason: "Ver esta temporada",
         seeShop: "Ver la tienda",
@@ -611,6 +613,7 @@
 
     document.querySelectorAll("[data-buy]").forEach((button) => {
       if (button.target === "_blank") button.textContent = pack.ui.buy;
+      else if (/^(\.\.\/)*(blankets|scarves|hats|sets|decor)\/$/.test(button.getAttribute("href") || "")) button.textContent = pack.ui.shopNow || "Shop now";
       else if (!button.hasAttribute("data-i18n")) button.textContent = pack.ui.requestPiece;
     });
 

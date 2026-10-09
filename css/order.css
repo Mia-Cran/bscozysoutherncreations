@@ -50,7 +50,7 @@
 .order-line label { margin: 0; font-size: 0.85rem; }
 .order-line select, .order-line input { display: block; width: 100%; margin-top: 0.25rem; padding: 0.6rem; font: inherit; color: var(--ink);
   border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-sizing: border-box; }
-.order-line-size[hidden] { display: none; }
+.order-line-size[hidden], .order-line-color[hidden] { display: none; }
 .order-line-foot { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; min-height: 1.2rem; }
 .order-line-price { font-weight: 600; color: var(--ink); }
 .order-line-remove { appearance: none; border: 0; background: none; color: #a23b3b; font: inherit; font-size: 0.85rem; cursor: pointer; padding: 0; }

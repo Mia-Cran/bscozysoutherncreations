@@ -56,6 +56,11 @@
         button.href = "resin/";
         button.removeAttribute("target");
         button.textContent = label || "See what we pour";
+      } else if (button.getAttribute("href") && button.getAttribute("href") !== "#contact") {
+        // Category cards link to their own page (blankets/, scarves/, …); keep it.
+        button.removeAttribute("target");
+        button.removeAttribute("data-i18n");
+        button.textContent = "Shop now";
       } else {
         button.href = "#contact";
         button.removeAttribute("target");
@@ -100,8 +105,9 @@
           const titleAttr = copyKeys[0] ? ` data-i18n="${copyKeys[0]}"` : "";
           const textAttr = copyKeys[1] ? ` data-i18n="${copyKeys[1]}"` : "";
           const isResin = product.id === "resin";
-          const buyHref = isResin ? "resin/" : "#contact";
-          const buyLabel = isResin ? "See what we pour" : "Request this piece";
+          const pages = { blankets: "blankets/", scarves: "scarves/", hats: "hats/", sets: "sets/", decor: "decor/", resin: "resin/" };
+          const buyHref = pages[product.id] || "#contact";
+          const buyLabel = isResin ? "See what we pour" : pages[product.id] ? "Shop now" : "Request this piece";
           const buyI18n = isResin ? ` data-i18n="ui.seePour"` : "";
           return `
             <figure class="product is-in" id="product-${escapeHtml(product.id)}">
@@ -157,7 +163,7 @@
   };
 
   const page = document.body.dataset.page || "home";
-  const assetRoot = page === "home" ? "" : page === "resin" || page === "order" || page === "feedback" ? "../" : "../../";
+  const assetRoot = page === "home" ? "" : ["resin", "order", "feedback", "blankets", "scarves", "hats", "sets", "decor"].includes(page) ? "../" : "../../";
   let inboxEmail = "";
   loadJson(`${assetRoot}content.json`).then((local) => {
     inboxEmail = String(local?.contact?.email || lastContent?.contact?.email || "").trim();

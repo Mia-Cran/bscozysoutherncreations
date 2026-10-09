@@ -88,8 +88,12 @@
     const itemSel = line.querySelector('[data-f="item"]');
     const sizeWrap = line.querySelector(".order-line-size");
     const sizeSel = line.querySelector('[data-f="size"]');
+    const colorWrap = line.querySelector(".order-line-color");
+    const colorSel = line.querySelector('[data-f="color"]');
     itemSel.addEventListener("change", () => {
       const item = itemById(itemSel.value);
+      colorWrap.hidden = Boolean(item?.noColor);
+      colorSel.required = !item?.noColor;
       if (item?.sizes?.length) {
         sizeSel.innerHTML = `<option value="">${esc(item.choosePrompt || "Choose a size…")}</option>` +
           item.sizes
@@ -129,7 +133,7 @@
       const quote = ready && (item.quote || !hasPrice(unit));
       return {
         line, item, size, qty, quote, ready,
-        color: line.querySelector('[data-f="color"]').value,
+        color: item?.noColor ? "as pictured" : line.querySelector('[data-f="color"]').value,
         total: ready && !quote ? unit * qty : 0,
       };
     });
@@ -338,6 +342,16 @@
         items: Array.isArray(o.items) ? o.items : [],
       };
       addLine();
+      // Preselect an item from a link like /order/?item=wreath
+      const want = new URLSearchParams(location.search).get("item");
+      if (want && itemById(want)) {
+        const sel = linesBox.querySelector('[data-f="item"]');
+        sel.value = want;
+        sel.dispatchEvent(new Event("change"));
+        const sz = new URLSearchParams(location.search).get("size");
+        const sizeSel = linesBox.querySelector('[data-f="size"]');
+        if (sz !== null && sizeSel.querySelector(`option[value="${CSS.escape(sz)}"]`)) sizeSel.value = sz;
+      }
       update();
       if (!cfg.paypal) paypalMissing.hidden = false;
       handleReturn();

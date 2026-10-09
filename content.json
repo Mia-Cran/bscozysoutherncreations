@@ -70,6 +70,15 @@
       "alt": "Gold flake and pastel resin pour",
       "price": "",
       "buyUrl": ""
+    },
+    {
+      "id": "decor",
+      "title": "Home décor",
+      "text": "Wreaths, pumpkin stacks, florals and door signs for every season.",
+      "image": "assets/products/decor/wreath-christmas-gnome.jpg",
+      "alt": "Handmade Christmas gnome pom-pom wreath",
+      "price": "",
+      "buyUrl": ""
     }
   ],
   "creations": {
@@ -119,7 +128,7 @@
     "note": "PayPal account email. Leave blank to hide online payment."
   },
   "orderForm": {
-    "_note": "Prices for the Order & Pay page (/order/). Blankets by size ($45/$65/$85); hats, scarves, stockings $12; set $24. Change a \"price\" here to raise it. Items with \"quote\": true have no price yet (B quotes them). shippingFlat and taxRate are PLACEHOLDERS: confirm taxRate with the Georgia Dept. of Revenue. Resin (Coasters, Games, Memories) is quote-only until B sets sizes/prices: add \"sizes\" with \"price\" and remove \"quote\".",
+    "_note": "Prices for the Order & Pay page (/order/). Blankets by size ($45/$65/$85); hats, scarves, stockings $12; set $24. Change a \"price\" here to raise it. Items with \"quote\": true have no price yet (B quotes them). shippingFlat and taxRate are PLACEHOLDERS: confirm taxRate with the Georgia Dept. of Revenue. Resin (Coasters, Games, Memories) is quote-only until B sets sizes/prices: add \"sizes\" with \"price\" and remove \"quote\". Home décor items (wreaths $25, pumpkin stack $40, fall floral $55, door signs $15) use \"noColor\": true so no yarn color is asked.",
     "taxRate": 0.08,
     "shippingFlat": 10,
     "localDeliveryFee": 0,
@@ -210,6 +219,100 @@
         "name": "Memories (keepsake)",
         "category": "Resin",
         "quote": true
+      },
+      {
+        "id": "ready-blanket",
+        "name": "Ready-made chunky blanket",
+        "category": "Ready to buy",
+        "noColor": true,
+        "choosePrompt": "Choose a blanket…",
+        "sizes": [
+          {
+            "name": "Royal blue & white, braided stripes",
+            "price": 45
+          },
+          {
+            "name": "Royal blue & white, wide stripes",
+            "price": 45
+          },
+          {
+            "name": "Navy with gray bands",
+            "price": 45
+          },
+          {
+            "name": "Navy with gray center stripe",
+            "price": 45
+          }
+        ]
+      },
+      {
+        "id": "ready-scarf",
+        "name": "Ready-made chunky scarf",
+        "category": "Ready to buy",
+        "noColor": true,
+        "choosePrompt": "Choose a scarf…",
+        "sizes": [
+          {
+            "name": "Coral",
+            "price": 15
+          },
+          {
+            "name": "Mustard",
+            "price": 15
+          }
+        ]
+      },
+      {
+        "id": "wreath",
+        "name": "Wreath",
+        "category": "Home décor",
+        "noColor": true,
+        "choosePrompt": "Choose a wreath…",
+        "sizes": [
+          {
+            "name": "Fall monogram",
+            "price": 25
+          },
+          {
+            "name": "Halloween “EEK!”",
+            "price": 25
+          },
+          {
+            "name": "Christmas gnome pom-pom",
+            "price": 25
+          }
+        ]
+      },
+      {
+        "id": "pumpkin-stack",
+        "name": "White pumpkin stack (3 pumpkins)",
+        "category": "Home décor",
+        "noColor": true,
+        "price": 40
+      },
+      {
+        "id": "fall-floral",
+        "name": "Fall floral arrangement",
+        "category": "Home décor",
+        "noColor": true,
+        "price": 55
+      },
+      {
+        "id": "door-sign",
+        "name": "Round initial door sign",
+        "category": "Home décor",
+        "noColor": true,
+        "choosePrompt": "Choose a color…",
+        "sizes": [
+          {
+            "name": "Orange",
+            "price": 15
+          },
+          {
+            "name": "Teal",
+            "price": 15
+          }
+        ]
       }
     ]
   },
