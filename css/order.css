@@ -76,3 +76,7 @@
 .order-pay .btn-venmo { display: inline-block; margin-top: 0.75rem; text-decoration: none; padding: 0.85rem 1.4rem; border-radius: 999px; font-weight: 600; }
 
 .order-form[hidden], .order-done[hidden], .order-paylater[hidden], .order-submit[hidden], .order-paylater-row .btn[hidden] { display: none !important; }
+.order-paylater-link { text-align: center; margin: 1.25rem 0 0; }
+.order-paylater-link[hidden] { display: none !important; }
+.linklike { background: none; border: 0; padding: 0.4rem; font: inherit; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.linklike:hover, .linklike:focus-visible { color: var(--ink); }

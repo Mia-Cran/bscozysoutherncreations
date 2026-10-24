@@ -245,6 +245,8 @@
     // The "Already have your price?" box is only for people B already quoted, so hide it here.
     const payLater = document.getElementById("order-paylater");
     if (payLater) payLater.hidden = true;
+    const payLaterLink = document.getElementById("order-paylater-link");
+    if (payLaterLink) payLaterLink.hidden = true;
     doneTitle.textContent = title;
     doneText.textContent = text;
     payBox.innerHTML = "";
@@ -291,6 +293,20 @@
     payBox.innerHTML = `<a class="btn btn-venmo" href="${esc(url)}" target="_blank" rel="noopener">Pay ${money(order.total)} with Venmo</a>`;
   });
 
+  // "Already have your price?" stays hidden until the customer asks for it
+  // (or B sends them the link bscozysoutherncreations.com/order/?pay).
+  const openPayLater = () => {
+    const box = document.getElementById("order-paylater");
+    const link = document.getElementById("order-paylater-link");
+    if (!box) return;
+    box.hidden = false;
+    if (link) link.hidden = true;
+    box.scrollIntoView({ behavior: "smooth", block: "start" });
+    payAmount?.focus({ preventScroll: true });
+  };
+  document.getElementById("show-paylater")?.addEventListener("click", openPayLater);
+  if (new URLSearchParams(location.search).has("pay")) setTimeout(openPayLater, 300);
+
   payVenmoBtn?.addEventListener("click", () => {
     if (!cfg.venmo) return;
     const amt = parseFloat(payAmount.value);
@@ -312,7 +328,7 @@
       submitBtn.disabled = false;
       update();
       if (!ok) return showError("That didn't send. Please try again, or email the shop directly.");
-      return showDone("Thank you! Your request was sent.", "B will email you a price. When you get it, come back to this page and pay it under \"Already have your price?\".");
+      return showDone("Thank you! Your request was sent.", "B will email you a price. When you get it, come back to this page and tap \"Already got a price from B? Pay it here.\"");
     }
 
     // Priced orders: pay first. The order is emailed to B after PayPal sends the customer back.
