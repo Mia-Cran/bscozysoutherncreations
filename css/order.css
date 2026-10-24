@@ -74,3 +74,5 @@
 .btn-venmo:hover, .btn-venmo:focus-visible { background: #0074d4; color: #fff; }
 #venmo-submit { margin-top: 0.6rem; }
 .order-pay .btn-venmo { display: inline-block; margin-top: 0.75rem; text-decoration: none; padding: 0.85rem 1.4rem; border-radius: 999px; font-weight: 600; }
+
+.order-form[hidden], .order-done[hidden], .order-paylater[hidden], .order-submit[hidden], .order-paylater-row .btn[hidden] { display: none !important; }
