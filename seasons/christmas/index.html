@@ -58,8 +58,18 @@
       </a>
     </div>
     <div class="header-end">
-    <nav class="nav" aria-label="Primary">
-      <a href="../../index.html#shop" data-i18n="nav.shop">Shop</a>
+      <button
+        type="button"
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        data-i18n-aria="ui.menu"
+        aria-label="Menu"
+      >
+        <span class="menu-toggle-bars" aria-hidden="true"></span>
+      </button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="../../index.html#ready-now" data-i18n="nav.shop">Shop</a>
       <div class="nav-dropdown">
         <button
           type="button"
@@ -74,9 +84,9 @@
         <ul class="nav-dropdown-menu" id="what-we-make-menu" hidden>
           <li><a href="../../blankets/" data-i18n="nav.blankets">Blankets &amp; throws</a></li>
           <li><a href="../../scarves/" data-i18n="nav.scarves">Scarves</a></li>
+          <li><a href="../../decor/" data-i18n="nav.seasonal">Wreaths &amp; seasonal</a></li>
           <li><a href="../../hats/" data-i18n="nav.hats">Hats &amp; beanies</a></li>
           <li><a href="../../sets/" data-i18n="nav.sets">Sets &amp; extras</a></li>
-          <li><a href="../../decor/">Home décor</a></li>
           <li><a href="../../resin/" data-i18n="nav.resin">Resin</a></li>
         </ul>
       </div>
@@ -120,7 +130,7 @@
         <p class="hero-lede" data-i18n="christmas.lede">Evergreen, cranberry, and gold — cozy knits and glossy pours that feel like Christmas morning at home.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#pieces" data-i18n="ui.seeSeason">See this season</a>
-          <a class="btn btn-ghost" href="../../index.html#shop" data-i18n="ui.seeShop">See the shop</a>
+          <a class="btn btn-ghost" href="../../index.html#ready-now" data-i18n="ui.seeShop">See the shop</a>
         </div>
       </div>
     </section>
@@ -129,7 +139,20 @@
       <div class="section-inner season-panel">
         <p class="eyebrow" data-i18n="christmas.secEye">The holly season</p>
         <h2 data-i18n="christmas.secTitle">Gifts that look like they were wrapped in the living room.</h2>
-        <p class="section-lede" data-i18n="christmas.secLede">Throws for movie nights, scarves for cold church mornings, and resin that sparkles like tinsel under glass.</p>
+        <p class="section-lede" data-i18n="christmas.secLede">The gnome wreath is ready now — plus throws, scarves, and resin that sparkle like tinsel.</p>
+        <div class="product-grid season-products">
+          <figure class="product is-in">
+            <img src="../../assets/products/christmas-gnome-wreath.jpg" alt="Handmade red and white pom-pom Christmas wreath with two knitted gnomes" width="800" height="800" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="home.christmasWreathTitle">Gnome Christmas wreath</h3>
+              <p data-i18n="home.christmasWreathText">Red-and-white pom-poms, candy canes, and two cozy gnomes for the door.</p>
+              <p class="price">$25</p>
+              <div class="product-actions">
+                <a class="btn btn-primary" href="#contact" data-i18n="ui.requestPiece">Request this piece</a>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
         <div class="season-grid">
           <article class="season-card">
             <h3 data-i18n="christmas.c0t">Cranberry knits</h3>

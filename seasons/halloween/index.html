@@ -58,8 +58,18 @@
       </a>
     </div>
     <div class="header-end">
-    <nav class="nav" aria-label="Primary">
-      <a href="../../index.html#shop" data-i18n="nav.shop">Shop</a>
+      <button
+        type="button"
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        data-i18n-aria="ui.menu"
+        aria-label="Menu"
+      >
+        <span class="menu-toggle-bars" aria-hidden="true"></span>
+      </button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="../../index.html#ready-now" data-i18n="nav.shop">Shop</a>
       <div class="nav-dropdown">
         <button
           type="button"
@@ -74,9 +84,9 @@
         <ul class="nav-dropdown-menu" id="what-we-make-menu" hidden>
           <li><a href="../../blankets/" data-i18n="nav.blankets">Blankets &amp; throws</a></li>
           <li><a href="../../scarves/" data-i18n="nav.scarves">Scarves</a></li>
+          <li><a href="../../decor/" data-i18n="nav.seasonal">Wreaths &amp; seasonal</a></li>
           <li><a href="../../hats/" data-i18n="nav.hats">Hats &amp; beanies</a></li>
           <li><a href="../../sets/" data-i18n="nav.sets">Sets &amp; extras</a></li>
-          <li><a href="../../decor/">Home décor</a></li>
           <li><a href="../../resin/" data-i18n="nav.resin">Resin</a></li>
         </ul>
       </div>
@@ -120,7 +130,7 @@
         <p class="hero-lede" data-i18n="halloween.lede">Moonlight plum, ember orange, and gold — knits and glossy pours with a hush of Halloween, not a costume shop.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#pieces" data-i18n="ui.seeSeason">See this season</a>
-          <a class="btn btn-ghost" href="../../index.html#shop" data-i18n="ui.seeShop">See the shop</a>
+          <a class="btn btn-ghost" href="../../index.html#ready-now" data-i18n="ui.seeShop">See the shop</a>
         </div>
       </div>
     </section>
@@ -129,7 +139,31 @@
       <div class="section-inner season-panel">
         <p class="eyebrow" data-i18n="halloween.secEye">October nights</p>
         <h2 data-i18n="halloween.secTitle">Pretty enough for the porch. Soft enough for the couch.</h2>
-        <p class="section-lede" data-i18n="halloween.secLede">Throws, scarves, and resin in deep color — a southern Halloween that still feels like home.</p>
+        <p class="section-lede" data-i18n="halloween.secLede">The EEK! wreath and stacked pumpkins are ready now — plus knits and resin in deep October color.</p>
+        <div class="product-grid season-products">
+          <figure class="product is-in">
+            <img src="../../assets/products/halloween-eek-wreath.jpg" alt="Handmade Halloween wreath with tinsel, a purple spider, and orange EEK letters" width="800" height="800" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="home.halloweenWreathTitle">EEK! Halloween wreath</h3>
+              <p data-i18n="home.halloweenWreathText">Tinsel, a glitter spider, eyeballs, and a sparkly bat — a playful porch piece.</p>
+              <p class="price">$25</p>
+              <div class="product-actions">
+                <a class="btn btn-primary" href="#contact" data-i18n="ui.requestPiece">Request this piece</a>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="product is-in">
+            <img src="../../assets/products/stacked-pumpkins.jpg" alt="Stacked white jack-o’-lanterns with gold faces and autumn leaves" width="800" height="800" loading="lazy" />
+            <figcaption>
+              <h3 data-i18n="home.pumpkinsTitle">Stacked pumpkin trio</h3>
+              <p data-i18n="home.pumpkinsText">Three white jack-o’-lanterns with gold faces and a crown of autumn leaves.</p>
+              <p class="price">$40 for 3</p>
+              <div class="product-actions">
+                <a class="btn btn-primary" href="#contact" data-i18n="ui.requestPiece">Request this piece</a>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
         <div class="season-grid">
           <article class="season-card">
             <h3 data-i18n="halloween.c0t">Moonlight knits</h3>

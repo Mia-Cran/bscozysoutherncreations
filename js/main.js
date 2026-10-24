@@ -49,18 +49,20 @@
       if (!button) return;
       if (buyUrl) {
         button.href = buyUrl;
-        button.target = "_blank";
-        button.rel = "noopener noreferrer";
-        button.textContent = "Buy";
+        const isExternal = /^https?:/i.test(buyUrl);
+        if (isExternal) {
+          button.target = "_blank";
+          button.rel = "noopener noreferrer";
+          button.textContent = label || "Buy";
+        } else {
+          button.removeAttribute("target");
+          button.removeAttribute("rel");
+          button.textContent = label || "See these pieces";
+        }
       } else if (id === "resin") {
         button.href = "resin/";
         button.removeAttribute("target");
         button.textContent = label || "See what we pour";
-      } else if (button.getAttribute("href") && button.getAttribute("href") !== "#contact") {
-        // Category cards link to their own page (blankets/, scarves/, …); keep it.
-        button.removeAttribute("target");
-        button.removeAttribute("data-i18n");
-        button.textContent = "Shop now";
       } else {
         button.href = "#contact";
         button.removeAttribute("target");
@@ -74,12 +76,31 @@
       hats: ["home.hatsTitle", "home.hatsText"],
       sets: ["home.setsTitle", "home.setsText"],
       resin: ["home.resinTitle", "home.resinText"],
+      "fall-wreath": ["home.fallWreathTitle", "home.fallWreathText"],
+      "halloween-wreath": ["home.halloweenWreathTitle", "home.halloweenWreathText"],
+      pumpkins: ["home.pumpkinsTitle", "home.pumpkinsText"],
+      "fall-bouquet": ["home.fallBouquetTitle", "home.fallBouquetText"],
+      "christmas-wreath": ["home.christmasWreathTitle", "home.christmasWreathText"],
+      "blanket-stripes": ["home.blanketStripesTitle", "home.blanketStripesText"],
+      "blanket-panel": ["home.blanketPanelTitle", "home.blanketPanelText"],
+      "blanket-bands": ["home.blanketBandsTitle", "home.blanketBandsText"],
+      "blanket-taupe": ["home.blanketTaupeTitle", "home.blanketTaupeText"],
+      "scarf-terracotta": ["home.scarfTerracottaTitle", "home.scarfTerracottaText"],
+      "scarf-mustard": ["home.scarfMustardTitle", "home.scarfMustardText"],
     };
 
     const applyPrice = (id, price) => {
       const node = document.querySelector(`[data-price="${id}"]`);
       if (!node) return;
       const value = String(price || "").trim();
+      node.hidden = !value;
+      node.textContent = value;
+    };
+
+    const applySize = (id, size) => {
+      const node = document.querySelector(`[data-size="${id}"]`);
+      if (!node) return;
+      const value = String(size || "").trim();
       node.hidden = !value;
       node.textContent = value;
     };
@@ -95,42 +116,56 @@
       });
     }
 
-    const grid = document.querySelector("[data-product-grid]");
-    if (grid) {
-      grid.innerHTML = products
-        .map((product) => {
-          const price = String(product.price || "").trim();
-          const image = product.image || "assets/products/blanket.jpg";
-          const copyKeys = productCopy[product.id] || [];
-          const titleAttr = copyKeys[0] ? ` data-i18n="${copyKeys[0]}"` : "";
-          const textAttr = copyKeys[1] ? ` data-i18n="${copyKeys[1]}"` : "";
-          const isResin = product.id === "resin";
-          const pages = { blankets: "blankets/", scarves: "scarves/", hats: "hats/", sets: "sets/", decor: "decor/", resin: "resin/" };
-          const buyHref = pages[product.id] || "#contact";
-          const buyLabel = isResin ? "See what we pour" : pages[product.id] ? "Shop now" : "Request this piece";
-          const buyI18n = isResin ? ` data-i18n="ui.seePour"` : "";
-          return `
+    const productMarkup = (product) => {
+      const price = String(product.price || "").trim();
+      const size = String(product.size || "").trim();
+      const image = product.image || "assets/products/blanket.jpg";
+      const copyKeys = productCopy[product.id] || [];
+      const titleAttr = copyKeys[0] ? ` data-i18n="${copyKeys[0]}"` : "";
+      const textAttr = copyKeys[1] ? ` data-i18n="${copyKeys[1]}"` : "";
+      const isResin = product.id === "resin";
+      const buyHref = product.buyUrl || (isResin ? "resin/" : "#contact");
+      const buyLabel = product.cta || (isResin ? "See what we pour" : "Request this piece");
+      const isExternal = /^https?:/i.test(buyHref);
+      const buyI18n = product.cta
+        ? ""
+        : isResin
+          ? ` data-i18n="ui.seePour"`
+          : ` data-i18n="ui.requestPiece"`;
+      return `
             <figure class="product is-in" id="product-${escapeHtml(product.id)}">
-              <img src="${escapeHtml(image)}" alt="${escapeHtml(product.alt || product.title)}" width="800" height="600" loading="lazy" />
+              <img src="${escapeHtml(image)}" alt="${escapeHtml(product.alt || product.title)}" width="800" height="800" loading="lazy" />
               <figcaption>
                 <h3${titleAttr}>${escapeHtml(product.title)}</h3>
                 <p${textAttr}>${escapeHtml(product.text)}</p>
                 <p class="price"${price ? "" : " hidden"}>${escapeHtml(price)}</p>
+                <p class="size"${size ? "" : " hidden"}>${escapeHtml(size)}</p>
                 <div class="product-actions">
-                  <a class="btn btn-primary" data-buy="${escapeHtml(product.id)}" href="${buyHref}"${buyI18n}>${buyLabel}</a>
+                  <a class="btn btn-primary" data-buy="${escapeHtml(product.id)}" href="${escapeHtml(buyHref)}"${isExternal ? ` target="_blank" rel="noopener noreferrer"` : ""}${buyI18n}>${escapeHtml(buyLabel)}</a>
                 </div>
               </figcaption>
             </figure>
           `;
-        })
-        .join("");
+    };
+
+    const grid = document.querySelector("[data-product-grid]");
+    if (grid) {
+      grid.innerHTML = products.map(productMarkup).join("");
+    }
+
+    const readyGrid = document.querySelector("[data-ready-grid]");
+    const readyNow = Array.isArray(content.readyNow) ? content.readyNow : [];
+    if (readyGrid && readyNow.length) {
+      readyGrid.innerHTML = readyNow.map(productMarkup).join("");
     }
 
     applyBuy("featured", content.featured?.buyUrl, content.featured?.cta);
     applyPrice("featured", content.featured?.price);
-    products.forEach((product) => {
-      applyBuy(product.id, product.buyUrl);
+    applySize("featured", content.featured?.size);
+    [...products, ...readyNow].forEach((product) => {
+      applyBuy(product.id, product.buyUrl, product.cta);
       applyPrice(product.id, product.price);
+      applySize(product.id, product.size);
     });
 
     window.BscI18n?.apply();
@@ -151,6 +186,18 @@
   ]).then(([remote, local]) => {
     const content =
       remote?.featured && Array.isArray(remote.products) ? remote : local;
+    if (content && Array.isArray(local?.readyNow) && local.readyNow.length) {
+      content.readyNow = local.readyNow;
+    }
+    if (content?.featured && local?.featured?.size) {
+      content.featured.size = local.featured.size;
+    }
+    if (Array.isArray(content?.products) && Array.isArray(local?.products)) {
+      content.products = content.products.map((product) => {
+        const localProduct = local.products.find((item) => item.id === product.id);
+        return localProduct?.size ? { ...product, size: localProduct.size } : product;
+      });
+    }
     if (content) {
       lastContent = content;
       applyContent(content);
@@ -163,7 +210,8 @@
   };
 
   const page = document.body.dataset.page || "home";
-  const assetRoot = page === "home" ? "" : ["resin", "order", "feedback", "blankets", "scarves", "hats", "sets", "decor"].includes(page) ? "../" : "../../";
+  const oneUpPages = ["resin", "order", "feedback", "blankets", "scarves", "hats", "sets", "decor"];
+  const assetRoot = page === "home" ? "" : oneUpPages.includes(page) ? "../" : "../../";
   let inboxEmail = "";
   loadJson(`${assetRoot}content.json`).then((local) => {
     inboxEmail = String(local?.contact?.email || lastContent?.contact?.email || "").trim();
@@ -219,7 +267,7 @@
   // Mobile menu: a toggle button + Admin link are added to every page's header
   const siteHeader = document.querySelector(".site-header");
   const headerEnd = siteHeader && siteHeader.querySelector(".header-end");
-  if (siteHeader && headerEnd && !siteHeader.querySelector(".nav-toggle")) {
+  if (siteHeader && headerEnd && !siteHeader.querySelector(".nav-toggle, .menu-toggle")) {
     if (!headerEnd.id) headerEnd.id = "site-menu";
     const menuBtn = document.createElement("button");
     menuBtn.type = "button";
@@ -263,6 +311,8 @@
   }
 
   const dropdowns = [...document.querySelectorAll(".nav-dropdown")];
+  const menuToggle = document.querySelector(".menu-toggle");
+  const primaryNav = document.getElementById("primary-nav");
 
   const closeDropdown = (dropdown) => {
     const toggle = dropdown.querySelector(".nav-dropdown-toggle");
@@ -273,6 +323,31 @@
   };
 
   const closeAllDropdowns = () => dropdowns.forEach(closeDropdown);
+
+  const menuLabel = () =>
+    document.documentElement.lang === "es" ? "Menú" : "Menu";
+  const closeMenuLabel = () =>
+    document.documentElement.lang === "es" ? "Cerrar menú" : "Close menu";
+
+  const setNavOpen = (open) => {
+    if (!siteHeader || !menuToggle) return;
+    siteHeader.classList.toggle("is-nav-open", open);
+    menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    menuToggle.setAttribute("aria-label", open ? closeMenuLabel() : menuLabel());
+    if (!open) closeAllDropdowns();
+  };
+
+  if (menuToggle && siteHeader) {
+    menuToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const open = !siteHeader.classList.contains("is-nav-open");
+      setNavOpen(open);
+    });
+
+    primaryNav?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setNavOpen(false));
+    });
+  }
 
   dropdowns.forEach((dropdown) => {
     const toggle = dropdown.querySelector(".nav-dropdown-toggle");
@@ -290,19 +365,40 @@
     });
 
     menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => closeAllDropdowns());
+      link.addEventListener("click", () => {
+        closeAllDropdowns();
+        setNavOpen(false);
+      });
     });
   });
 
-  if (dropdowns.length) {
+  if (dropdowns.length || menuToggle) {
     document.addEventListener("click", (event) => {
-      if (!dropdowns.some((dropdown) => dropdown.contains(event.target))) {
+      const inHeader = siteHeader?.contains(event.target);
+      if (!inHeader) {
+        closeAllDropdowns();
+        setNavOpen(false);
+        return;
+      }
+      if (
+        dropdowns.length &&
+        !dropdowns.some((dropdown) => dropdown.contains(event.target))
+      ) {
         closeAllDropdowns();
       }
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeAllDropdowns();
+      if (event.key === "Escape") {
+        closeAllDropdowns();
+        setNavOpen(false);
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.matchMedia("(min-width: 761px)").matches) {
+        setNavOpen(false);
+      }
     });
   }
 
