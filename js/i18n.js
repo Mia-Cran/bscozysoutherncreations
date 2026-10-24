@@ -35,6 +35,8 @@
         requestCustom: "Request a custom piece",
         requestPiece: "Request this piece",
         shopNow: "Shop now",
+        buyNow: "Buy now",
+        orderNow: "Order now",
         buy: "Buy",
         seeSeason: "See this season",
         seeShop: "See the shop",
@@ -343,6 +345,8 @@
         requestCustom: "Pedir una pieza a medida",
         requestPiece: "Pedir esta pieza",
         shopNow: "Ver todo",
+        buyNow: "Comprar ahora",
+        orderNow: "Pedir ahora",
         buy: "Comprar",
         seeSeason: "Ver esta temporada",
         seeShop: "Ver la tienda",
@@ -670,6 +674,8 @@
     document.querySelectorAll("[data-buy]").forEach((button) => {
       if (button.target === "_blank") button.textContent = pack.ui.buy;
       else if (/^(\.\.\/)*(blankets|scarves|hats|sets|decor)\/$/.test(button.getAttribute("href") || "")) button.textContent = pack.ui.shopNow || "Shop now";
+      else if (/(^|\/)order\/\?item=(hat|set)$/.test(button.getAttribute("href") || "")) button.textContent = pack.ui.orderNow || "Order now";
+      else if (/(^|\/)order\/\?item=/.test(button.getAttribute("href") || "")) button.textContent = pack.ui.buyNow || "Buy now";
       else if (!button.hasAttribute("data-i18n")) button.textContent = pack.ui.requestPiece;
     });
 

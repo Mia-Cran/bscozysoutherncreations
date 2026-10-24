@@ -23,8 +23,8 @@
     "alt": "Handmade pink and periwinkle chenille blanket on cream linen",
     "price": "$45",
     "size": "40 x 60",
-    "cta": "Request this piece",
-    "buyUrl": ""
+    "cta": "Buy now",
+    "buyUrl": "order/?item=ready-blanket&size=4"
   },
   "products": [
     {
@@ -55,7 +55,8 @@
       "image": "assets/products/hat.jpg",
       "alt": "Handmade knit beanies in blue, pink, and sage",
       "price": "",
-      "buyUrl": ""
+      "buyUrl": "order/?item=hat",
+      "cta": "Order now"
     },
     {
       "id": "sets",
@@ -64,7 +65,8 @@
       "image": "assets/products/set.jpg",
       "alt": "Handmade knit mittens and scarf set with pastel yarn",
       "price": "",
-      "buyUrl": ""
+      "buyUrl": "order/?item=set",
+      "cta": "Order now"
     },
     {
       "id": "resin",
@@ -85,7 +87,8 @@
       "alt": "Handmade royal blue and white striped chunky throw",
       "price": "$45",
       "size": "40 x 60",
-      "buyUrl": ""
+      "buyUrl": "order/?item=ready-blanket&size=0",
+      "cta": "Buy now"
     },
     {
       "id": "blanket-panel",
@@ -95,7 +98,8 @@
       "alt": "Handmade royal blue throw with a wide white center panel",
       "price": "$45",
       "size": "40 x 60",
-      "buyUrl": ""
+      "buyUrl": "order/?item=ready-blanket&size=1",
+      "cta": "Buy now"
     },
     {
       "id": "blanket-bands",
@@ -105,7 +109,8 @@
       "alt": "Handmade royal blue and white wide-band chunky throw",
       "price": "$45",
       "size": "40 x 60",
-      "buyUrl": ""
+      "buyUrl": "order/?item=ready-blanket&size=2",
+      "cta": "Buy now"
     },
     {
       "id": "blanket-taupe",
@@ -115,7 +120,8 @@
       "alt": "Handmade blue chunky throw with a taupe center stripe",
       "price": "$45",
       "size": "40 x 60",
-      "buyUrl": ""
+      "buyUrl": "order/?item=ready-blanket&size=3",
+      "cta": "Buy now"
     },
     {
       "id": "scarf-terracotta",
@@ -124,7 +130,8 @@
       "image": "assets/products/scarf-terracotta.jpg",
       "alt": "Handmade terracotta chunky chenille scarf rolled and ready",
       "price": "$15",
-      "buyUrl": ""
+      "buyUrl": "order/?item=ready-scarf&size=0",
+      "cta": "Buy now"
     },
     {
       "id": "scarf-mustard",
@@ -133,7 +140,8 @@
       "image": "assets/products/scarf-mustard.jpg",
       "alt": "Handmade mustard yellow chunky chenille scarf rolled and ready",
       "price": "$15",
-      "buyUrl": ""
+      "buyUrl": "order/?item=ready-scarf&size=1",
+      "cta": "Buy now"
     },
     {
       "id": "fall-wreath",
@@ -142,7 +150,8 @@
       "image": "assets/products/fall-t-wreath.jpg",
       "alt": "Handmade orange tulle fall wreath with maple leaves and a wooden letter T",
       "price": "$25",
-      "buyUrl": ""
+      "buyUrl": "order/?item=wreath&size=0",
+      "cta": "Buy now"
     },
     {
       "id": "halloween-wreath",
@@ -151,7 +160,8 @@
       "image": "assets/products/halloween-eek-wreath.jpg",
       "alt": "Handmade Halloween wreath with tinsel, a purple spider, and orange EEK letters",
       "price": "$25",
-      "buyUrl": ""
+      "buyUrl": "order/?item=wreath&size=1",
+      "cta": "Buy now"
     },
     {
       "id": "pumpkins",
@@ -160,7 +170,8 @@
       "image": "assets/products/stacked-pumpkins.jpg",
       "alt": "Stacked white jack-o’-lanterns with gold faces and autumn leaves",
       "price": "$40 for 3",
-      "buyUrl": ""
+      "buyUrl": "order/?item=pumpkin-stack",
+      "cta": "Buy now"
     },
     {
       "id": "fall-bouquet",
@@ -169,7 +180,8 @@
       "image": "assets/products/fall-bouquet.jpg",
       "alt": "Handmade fall bouquet in a mason jar with pinecones and autumn foliage",
       "price": "$55",
-      "buyUrl": ""
+      "buyUrl": "order/?item=fall-floral",
+      "cta": "Buy now"
     },
     {
       "id": "christmas-wreath",
@@ -178,7 +190,8 @@
       "image": "assets/products/christmas-gnome-wreath.jpg",
       "alt": "Handmade red and white pom-pom Christmas wreath with two knitted gnomes",
       "price": "$25",
-      "buyUrl": ""
+      "buyUrl": "order/?item=wreath&size=2",
+      "cta": "Buy now"
     }
   ],
   "creations": {
@@ -326,25 +339,29 @@
       },
       {
         "id": "ready-blanket",
-        "name": "Ready-made chunky blanket",
+        "name": "Ready-made throw (40 x 60)",
         "category": "Ready to buy",
         "noColor": true,
         "choosePrompt": "Choose a blanket…",
         "sizes": [
           {
-            "name": "Royal blue & white, braided stripes",
+            "name": "Blue & white stripe throw",
             "price": 45
           },
           {
-            "name": "Royal blue & white, wide stripes",
+            "name": "Blue & white panel throw",
             "price": 45
           },
           {
-            "name": "Navy with gray bands",
+            "name": "Blue & white banded throw",
             "price": 45
           },
           {
-            "name": "Navy with gray center stripe",
+            "name": "Blue & taupe stripe throw",
+            "price": 45
+          },
+          {
+            "name": "Pink and periwinkle throw",
             "price": 45
           }
         ]
@@ -357,11 +374,11 @@
         "choosePrompt": "Choose a scarf…",
         "sizes": [
           {
-            "name": "Coral",
+            "name": "Terracotta chenille scarf",
             "price": 15
           },
           {
-            "name": "Mustard",
+            "name": "Mustard chenille scarf",
             "price": 15
           }
         ]
@@ -374,29 +391,29 @@
         "choosePrompt": "Choose a wreath…",
         "sizes": [
           {
-            "name": "Fall monogram",
+            "name": "Monogram fall wreath",
             "price": 25
           },
           {
-            "name": "Halloween “EEK!”",
+            "name": "EEK! Halloween wreath",
             "price": 25
           },
           {
-            "name": "Christmas gnome pom-pom",
+            "name": "Gnome Christmas wreath",
             "price": 25
           }
         ]
       },
       {
         "id": "pumpkin-stack",
-        "name": "White pumpkin stack (3 pumpkins)",
+        "name": "Stacked pumpkin trio (3 pumpkins)",
         "category": "Home décor",
         "noColor": true,
         "price": 40
       },
       {
         "id": "fall-floral",
-        "name": "Fall floral arrangement",
+        "name": "Fall bouquet",
         "category": "Home décor",
         "noColor": true,
         "price": 55
