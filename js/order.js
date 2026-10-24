@@ -76,7 +76,7 @@
       <label class="order-line-color">Color
         <select data-f="color" required>
           <option value="">Choose a color…</option>
-          ${cfg.colors.map((c) => `<option>${esc(c)}</option>`).join("")}
+          ${cfg.colors.map((c) => `<option value="${esc(c)}">${esc(c)}</option>`).join("")}
         </select>
       </label>
       <label class="order-line-qty">Qty
