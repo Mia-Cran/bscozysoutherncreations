@@ -242,6 +242,9 @@
   const showDone = (title, text) => {
     form.hidden = true;
     done.hidden = false;
+    // The "Already have your price?" box is only for people B already quoted, so hide it here.
+    const payLater = document.getElementById("order-paylater");
+    if (payLater) payLater.hidden = true;
     doneTitle.textContent = title;
     doneText.textContent = text;
     payBox.innerHTML = "";
@@ -309,7 +312,7 @@
       submitBtn.disabled = false;
       update();
       if (!ok) return showError("That didn't send. Please try again, or email the shop directly.");
-      return showDone("Thank you! Your request was sent.", "B will email you a price. When you get it, you can pay with PayPal or Venmo below.");
+      return showDone("Thank you! Your request was sent.", "B will email you a price. When you get it, come back to this page and pay it under \"Already have your price?\".");
     }
 
     // Priced orders: pay first. The order is emailed to B after PayPal sends the customer back.
