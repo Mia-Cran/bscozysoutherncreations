@@ -26,7 +26,7 @@
       price:
         "Prices show on each piece when they’re listed. Custom work depends on size, yarn, and the pour. Share what you want and we’ll send a number.",
       ship:
-        "Handmade pieces are made to order, so timing depends on the piece and the date you need it. Share your timeline and the shop will confirm.",
+        "Handmade pieces are made to order, so timing depends on the piece and the date you need it. Share your timeline and the shop will confirm. Right now we offer local pickup and delivery only (Warner Robins, Macon, Perry, Byron).",
       care:
         "Knits are handmade-soft — we’ll include care notes with your piece. Resin is a glossy sealed pour; wipe it gently and keep it out of harsh heat.",
       human:
@@ -64,7 +64,7 @@
       price:
         "El precio aparece en cada pieza cuando está listado. Lo a medida depende del tamaño, la lana y el vaciado. Cuéntanos qué quieres y te mandamos un número.",
       ship:
-        "Las piezas se hacen por encargo, así que el tiempo depende de lo que pidas y la fecha que necesitas. Comparte tu fecha y la tienda confirma.",
+        "Las piezas se hacen por encargo, así que el tiempo depende de lo que pidas y la fecha que necesitas. Comparte tu fecha y la tienda confirma. Por ahora solo entregamos o recoges en persona (Warner Robins, Macon, Perry, Byron).",
       care:
         "Los tejidos son suaves hechos a mano — incluimos notas de cuidado. La resina es un vaciado brillante; límpiala con suavidad y lejos del calor fuerte.",
       human:

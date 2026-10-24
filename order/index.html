@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Order &amp; Pay | B's Cozy Southern Creations</title>
-  <meta name="description" content="Order handmade blankets, scarves, hats, sets and resin pieces from B's Cozy Southern Creations, then pay securely with PayPal." />
+  <meta name="description" content="Order handmade blankets, scarves, hats, sets and resin pieces from B's Cozy Southern Creations, then pay securely with PayPal or Venmo." />
   <meta name="author" content="B's Cozy Southern Creations" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://bscozysoutherncreations.com/order/" />
@@ -117,7 +117,6 @@
         <div class="order-handoff" id="order-handoff">
           <label><input type="radio" name="handoff" value="pickup" checked /> Local pickup</label>
           <label><input type="radio" name="handoff" value="delivery" /> Local delivery (Warner Robins, Macon, Perry, Byron)</label>
-          <label><input type="radio" name="handoff" value="ship" /> Ship it to me</label>
         </div>
         <div class="order-address" id="order-address" hidden>
           <label>Street address <input type="text" name="address" autocomplete="street-address" /></label>
@@ -131,6 +130,7 @@
       <div class="order-totals" id="order-totals" aria-live="polite"></div>
       <p class="order-error" id="order-error" hidden></p>
       <button class="btn btn-primary order-submit" type="submit">Send my order</button>
+      <button class="btn btn-venmo order-submit" type="button" id="venmo-submit" hidden>Pay with Venmo</button>
     </form>
 
     <section class="order-done" id="order-done" hidden>
@@ -145,6 +145,7 @@
       <div class="order-paylater-row">
         <label>Amount ($) <input type="number" id="pay-amount" min="1" step="0.01" inputmode="decimal" placeholder="0.00" /></label>
         <button class="btn btn-primary" type="button" id="pay-amount-btn">Pay with PayPal</button>
+        <button class="btn btn-venmo" type="button" id="pay-venmo-btn" hidden>Pay with Venmo</button>
       </div>
       <p class="order-hint" id="paypal-missing" hidden>Online payment is being set up. For now, B will send you a payment link.</p>
     </section>

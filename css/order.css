@@ -68,3 +68,9 @@
   .order-line-qty { grid-column: auto; }
   .order-two { grid-template-columns: 1fr; }
 }
+
+/* Venmo */
+.btn-venmo { background: #008cff; color: #fff; border: 0; }
+.btn-venmo:hover, .btn-venmo:focus-visible { background: #0074d4; color: #fff; }
+#venmo-submit { margin-top: 0.6rem; }
+.order-pay .btn-venmo { display: inline-block; margin-top: 0.75rem; text-decoration: none; padding: 0.85rem 1.4rem; border-radius: 999px; font-weight: 600; }

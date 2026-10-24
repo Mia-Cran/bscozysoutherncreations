@@ -27,8 +27,10 @@
   const payAmount = $("pay-amount");
   const payAmountBtn = $("pay-amount-btn");
   const paypalMissing = $("paypal-missing");
+  const venmoSubmit = $("venmo-submit");
+  const payVenmoBtn = $("pay-venmo-btn");
 
-  let cfg = { inbox: "", paypal: "", taxRate: 0, shippingFlat: 0, localDeliveryFee: 0, colors: [], items: [] };
+  let cfg = { inbox: "", paypal: "", venmo: "", taxRate: 0, shippingFlat: 0, localDeliveryFee: 0, colors: [], items: [] };
   const money = (n) => `$${(Math.round(n * 100) / 100).toFixed(2)}`;
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const itemById = (id) => cfg.items.find((i) => i.id === id);
@@ -162,7 +164,11 @@
 
     submitBtn.textContent = needsQuote
       ? "Send my request"
-      : subtotal ? `Continue to PayPal – ${money(total)}` : "Continue to PayPal";
+      : subtotal ? `Pay with PayPal – ${money(total)}` : "Pay with PayPal";
+    if (venmoSubmit) {
+      venmoSubmit.hidden = needsQuote || !cfg.venmo;
+      venmoSubmit.textContent = subtotal ? `Pay with Venmo – ${money(total)}` : "Pay with Venmo";
+    }
 
     if (!subtotal) {
       totalsBox.innerHTML = needsQuote ? `<p class="order-hint">B will email you a price for your order. You'll pay after you get it.</p>` : "";
@@ -243,15 +249,54 @@
   };
 
   /* ---------- submit ---------- */
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  const checkForm = () => {
     showError("");
     const { lines } = calc();
     if (lines.some((l) => !l.item || !l.color || (l.item.sizes?.length && !l.size))) {
-      return showError("Please choose an item, size (if it has one) and color on every line.");
+      showError("Please choose an item, size (if it has one) and color on every line.");
+      return false;
     }
-    if (!form.reportValidity()) return;
-    if (!cfg.inbox) return showError("Orders can't be sent right now. Please email the shop directly.");
+    if (!form.reportValidity()) return false;
+    if (!cfg.inbox) { showError("Orders can't be sent right now. Please email the shop directly."); return false; }
+    return true;
+  };
+
+  /* ---------- Venmo ---------- */
+  // Opens Venmo (the app on phones) with B's account, the amount and the order number filled in.
+  const venmoUrl = (amount, note) => {
+    const params = new URLSearchParams({ txn: "pay", note: note || "B's Cozy Southern Creations" });
+    if (amount > 0) params.set("amount", amount.toFixed(2));
+    return `https://venmo.com/${encodeURIComponent(cfg.venmo)}?${params.toString()}`;
+  };
+
+  venmoSubmit?.addEventListener("click", async () => {
+    if (!checkForm() || !cfg.venmo) return;
+    const order = buildOrder();
+    if (order.needsQuote) return;
+    const name = `${order.fields.first_name} ${order.fields.last_name}`;
+    venmoSubmit.disabled = true;
+    venmoSubmit.textContent = "Sending…";
+    const ok = await emailOrder(order, `VENMO ORDER – CHECK VENMO BEFORE MAKING – ${name} – ${money(order.total)}`, {
+      payment_status: `Paying with Venmo – look for ${money(order.total)} from ${name} with note ${order.id}`,
+    });
+    venmoSubmit.disabled = false;
+    update();
+    if (!ok) return showError("That didn't send. Please try again, or email the shop directly.");
+    const url = venmoUrl(order.total, `Order ${order.id}`);
+    showDone("Almost done! Now pay with Venmo.",
+      `Your order number is ${order.id}. Tap the button to pay ${money(order.total)} to @${cfg.venmo}. B will reach out to set up pickup or delivery once the payment comes in.`);
+    payBox.innerHTML = `<a class="btn btn-venmo" href="${esc(url)}" target="_blank" rel="noopener">Pay ${money(order.total)} with Venmo</a>`;
+  });
+
+  payVenmoBtn?.addEventListener("click", () => {
+    if (!cfg.venmo) return;
+    const amt = parseFloat(payAmount.value);
+    window.open(venmoUrl(amt > 0 ? amt : 0, "B's Cozy Southern Creations – quoted order"), "_blank", "noopener");
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!checkForm()) return;
 
     const order = buildOrder();
     const name = `${order.fields.first_name} ${order.fields.last_name}`;
@@ -264,7 +309,7 @@
       submitBtn.disabled = false;
       update();
       if (!ok) return showError("That didn't send. Please try again, or email the shop directly.");
-      return showDone("Thank you! Your request was sent.", "B will email you a price. When you get it, you can pay with PayPal below.");
+      return showDone("Thank you! Your request was sent.", "B will email you a price. When you get it, you can pay with PayPal or Venmo below.");
     }
 
     // Priced orders: pay first. The order is emailed to B after PayPal sends the customer back.
@@ -323,7 +368,7 @@
       });
       if (ok) store.set(`bcsc-order-${paidId}`, { ...saved, sent: true });
     }
-    showDone("Thank you! Your order is paid.", `Your order number is ${paidId}. B will reach out about pickup, delivery or shipping.`);
+    showDone("Thank you! Your order is paid.", `Your order number is ${paidId}. B will reach out to set up pickup or delivery.`);
   };
 
   /* ---------- load settings ---------- */
@@ -335,6 +380,7 @@
       cfg = {
         inbox: String(data?.contact?.email || "").trim(),
         paypal: String(data?.paypal?.email || "").trim(),
+        venmo: String(data?.venmo?.username || "").trim().replace(/^@/, ""),
         taxRate: Number(o.taxRate) || 0,
         shippingFlat: Number(o.shippingFlat) || 0,
         localDeliveryFee: Number(o.localDeliveryFee) || 0,
@@ -353,7 +399,8 @@
         if (sz !== null && sizeSel.querySelector(`option[value="${CSS.escape(sz)}"]`)) sizeSel.value = sz;
       }
       update();
-      if (!cfg.paypal) paypalMissing.hidden = false;
+      if (payVenmoBtn) payVenmoBtn.hidden = !cfg.venmo;
+      if (!cfg.paypal && !cfg.venmo) paypalMissing.hidden = false;
       handleReturn();
     });
 })();

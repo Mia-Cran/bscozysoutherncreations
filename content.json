@@ -127,8 +127,12 @@
     "email": "bssoutherncreations24@gmail.com",
     "note": "PayPal account email. Leave blank to hide online payment."
   },
+  "venmo": {
+    "username": "Brandi-Tressler-1",
+    "note": "Venmo username without the @. Leave blank to hide the Venmo buttons."
+  },
   "orderForm": {
-    "_note": "Prices for the Order & Pay page (/order/). Blankets by size ($45/$65/$85); hats, scarves, stockings $12; set $24. Change a \"price\" here to raise it. Items with \"quote\": true have no price yet (B quotes them). shippingFlat and taxRate are PLACEHOLDERS: confirm taxRate with the Georgia Dept. of Revenue. Resin (Coasters, Games, Memories) is quote-only until B sets sizes/prices: add \"sizes\" with \"price\" and remove \"quote\". Home décor items (wreaths $25, pumpkin stack $40, fall floral $55, door signs $15) use \"noColor\": true so no yarn color is asked.",
+    "_note": "Prices for the Order & Pay page (/order/). Blankets by size ($45/$65/$85); hats, scarves, stockings $12; set $25. Change a \"price\" here to raise it. Items with \"quote\": true have no price yet (B quotes them). shippingFlat and taxRate are PLACEHOLDERS: confirm taxRate with the Georgia Dept. of Revenue. Resin (Coasters, Games, Memories) is quote-only until B sets sizes/prices: add \"sizes\" with \"price\" and remove \"quote\". Home décor items (wreaths $25, pumpkin stack $40, fall floral $55, door signs $15) use \"noColor\": true so no yarn color is asked.",
     "taxRate": 0.08,
     "shippingFlat": 10,
     "localDeliveryFee": 0,
@@ -187,7 +191,7 @@
       {
         "id": "set",
         "name": "Matching set (hat + scarf)",
-        "price": 24,
+        "price": 25,
         "category": "Knits"
       },
       {
