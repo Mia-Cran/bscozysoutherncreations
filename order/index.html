@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Great+Vibes&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/chat.css" />
-  <link rel="stylesheet" href="../css/order.css?v=5" />
+  <link rel="stylesheet" href="../css/order.css?v=6" />
   <link rel="stylesheet" href="../css/feedback.css" />
   <link rel="icon" href="../assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
@@ -139,18 +139,6 @@
       <div class="order-pay" id="order-pay"></div>
     </section>
 
-    <p class="order-paylater-link" id="order-paylater-link"><button type="button" class="linklike" id="show-paylater">Already got a price from B? Pay it here</button></p>
-
-    <section class="order-paylater" id="order-paylater" hidden>
-      <h2>Already have your price?</h2>
-      <p>If B already sent you a total, pay it here.</p>
-      <div class="order-paylater-row">
-        <label>Amount ($) <input type="number" id="pay-amount" min="1" step="0.01" inputmode="decimal" placeholder="0.00" /></label>
-        <button class="btn btn-primary" type="button" id="pay-amount-btn">Pay with PayPal</button>
-        <button class="btn btn-venmo" type="button" id="pay-venmo-btn" hidden>Pay with Venmo</button>
-      </div>
-      <p class="order-hint" id="paypal-missing" hidden>Online payment is being set up. For now, B will send you a payment link.</p>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -163,7 +151,7 @@
   <script src="../js/i18n.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/lightbox.js"></script>
-  <script src="../js/order.js?v=5"></script>
+  <script src="../js/order.js?v=6"></script>
   <script src="../js/chat.js"></script>
 </body>
 </html>

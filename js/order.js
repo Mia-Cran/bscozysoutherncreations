@@ -8,8 +8,9 @@
       emailed to B (marked PAID). The order summary is also put into the PayPal
       payment itself, so B's PayPal email shows what was ordered either way.
    2. Something needs a quote (e.g. resin without a price yet) -> the request
-      is emailed to B right away, marked "QUOTE REQUEST – NOT PAID". B replies
-      with a price and the customer pays with "Already have your price?". */
+      is emailed to B right away, marked "QUOTE REQUEST – NOT PAID".
+      B sets the price and sends a PayPal invoice or Venmo request. There is no
+      "type your own amount" box, so customers can only pay website prices. */
 (() => {
   const form = document.getElementById("order-form");
   if (!form) return;
@@ -282,7 +283,7 @@
     venmoSubmit.disabled = true;
     venmoSubmit.textContent = "Sending…";
     const ok = await emailOrder(order, `VENMO ORDER – CHECK VENMO BEFORE MAKING – ${name} – ${money(order.total)}`, {
-      payment_status: `Paying with Venmo – look for ${money(order.total)} from ${name} with note ${order.id}`,
+      payment_status: `NOT PAID YET – paying with Venmo. Only start once Venmo shows the FULL ${money(order.total)} from ${name} (note ${order.id}). If they send less, ask for the rest.`,
     });
     venmoSubmit.disabled = false;
     update();
@@ -305,11 +306,10 @@
     payAmount?.focus({ preventScroll: true });
   };
   document.getElementById("show-paylater")?.addEventListener("click", openPayLater);
-  if (new URLSearchParams(location.search).has("pay")) setTimeout(openPayLater, 300);
 
   payVenmoBtn?.addEventListener("click", () => {
     if (!cfg.venmo) return;
-    const amt = parseFloat(payAmount.value);
+    const amt = parseFloat(payAmount?.value);
     window.open(venmoUrl(amt > 0 ? amt : 0, "B's Cozy Southern Creations – quoted order"), "_blank", "noopener");
   });
 
@@ -324,11 +324,11 @@
     if (order.needsQuote) {
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending…";
-      const ok = await emailOrder(order, `QUOTE REQUEST – NOT PAID – ${name}`, { payment_status: "NOT PAID – needs a price quote" });
+      const ok = await emailOrder(order, `QUOTE REQUEST – NOT PAID – ${name}`, { payment_status: "NOT PAID – B sets the price, then sends a PayPal invoice or Venmo request for that amount" });
       submitBtn.disabled = false;
       update();
       if (!ok) return showError("That didn't send. Please try again, or email the shop directly.");
-      return showDone("Thank you! Your request was sent.", "B will email you a price. When you get it, come back to this page and tap \"Already got a price from B? Pay it here.\"");
+      return showDone("Thank you! Your request was sent.", "B will look over your request and send you a PayPal or Venmo request for the price. Your order starts once it is paid in full.");
     }
 
     // Priced orders: pay first. The order is emailed to B after PayPal sends the customer back.
@@ -360,8 +360,8 @@
   }
 
   payAmountBtn?.addEventListener("click", () => {
-    if (!cfg.paypal) { paypalMissing.hidden = false; return; }
-    const amt = parseFloat(payAmount.value);
+    if (!cfg.paypal) { paypalMissing && (paypalMissing.hidden = false); return; }
+    const amt = parseFloat(payAmount?.value);
     window.open(paypalUrl(amt > 0 ? amt : 0, "B's Cozy Southern Creations – quoted order"), "_blank", "noopener");
   });
 
@@ -383,7 +383,7 @@
     if (!saved.sent) {
       const name = `${saved.order.fields.first_name} ${saved.order.fields.last_name}`;
       const ok = await emailOrder(saved.order, `PAID ORDER – ${name} – ${money(saved.order.total)}`, {
-        payment_status: "PAID with PayPal (confirm the payment in PayPal)",
+        payment_status: `PAID with PayPal – check PayPal shows ${money(saved.order.total)} before making or handing over the order`,
       });
       if (ok) store.set(`bcsc-order-${paidId}`, { ...saved, sent: true });
     }
@@ -419,7 +419,7 @@
       }
       update();
       if (payVenmoBtn) payVenmoBtn.hidden = !cfg.venmo;
-      if (!cfg.paypal && !cfg.venmo) paypalMissing.hidden = false;
+      if (!cfg.paypal && !cfg.venmo) paypalMissing && (paypalMissing.hidden = false);
       handleReturn();
     });
 })();
