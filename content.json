@@ -131,7 +131,8 @@
       "alt": "Handmade terracotta chunky chenille scarf rolled and ready",
       "price": "$15",
       "buyUrl": "order/?item=ready-scarf&size=0",
-      "cta": "Buy now"
+      "cta": "Buy now",
+      "size": "60 in. long"
     },
     {
       "id": "scarf-mustard",
@@ -141,6 +142,18 @@
       "alt": "Handmade mustard yellow chunky chenille scarf rolled and ready",
       "price": "$15",
       "buyUrl": "order/?item=ready-scarf&size=1",
+      "cta": "Buy now",
+      "size": "60 in. long"
+    },
+    {
+      "id": "scarf-orange-black",
+      "title": "Orange & black chenille scarf",
+      "text": "Half pumpkin orange, half black, in chunky handmade chenille.",
+      "image": "assets/products/scarf-orange-black.jpg",
+      "alt": "Handmade orange and black chunky chenille scarf on cream linen",
+      "price": "$15",
+      "size": "60 in. long",
+      "buyUrl": "order/?item=ready-scarf&size=2",
       "cta": "Buy now"
     },
     {
@@ -379,6 +392,10 @@
           },
           {
             "name": "Mustard chenille scarf",
+            "price": 15
+          },
+          {
+            "name": "Orange & black chenille scarf",
             "price": 15
           }
         ]
