@@ -31,11 +31,11 @@
       "id": "blankets",
       "title": "Blankets & throws",
       "text": "Chunky, cozy, and made for couch nights and nursery nooks.",
-      "image": "assets/products/blanket-blue-white-stripes.jpg",
-      "alt": "Handmade royal blue and white chunky chenille throw",
+      "image": "assets/products/blanket-blue-white-panel.jpg",
+      "alt": "Handmade royal blue throw with a wide white center panel",
       "price": "$45",
       "size": "40 x 60",
-      "buyUrl": "#product-blanket-stripes",
+      "buyUrl": "#product-blanket-panel",
       "cta": "See the throws"
     },
     {
@@ -79,17 +79,6 @@
     }
   ],
   "readyNow": [
-    {
-      "id": "blanket-stripes",
-      "title": "Blue & white stripe throw",
-      "text": "Chunky chenille in royal blue and cream — a couch-ready handmade throw.",
-      "image": "assets/products/blanket-blue-white-stripes.jpg",
-      "alt": "Handmade royal blue and white striped chunky throw",
-      "price": "$45",
-      "size": "40 x 60",
-      "buyUrl": "order/?item=ready-blanket&size=0",
-      "cta": "Buy now"
-    },
     {
       "id": "blanket-panel",
       "title": "Blue & white panel throw",
@@ -359,7 +348,8 @@
         "sizes": [
           {
             "name": "Blue & white stripe throw",
-            "price": 45
+            "price": 45,
+            "sold": true
           },
           {
             "name": "Blue & white panel throw",

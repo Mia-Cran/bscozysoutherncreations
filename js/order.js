@@ -100,7 +100,7 @@
       if (item?.sizes?.length) {
         sizeSel.innerHTML = `<option value="">${esc(item.choosePrompt || "Choose a size…")}</option>` +
           item.sizes
-            .map((s, i) => `<option value="${i}">${esc(s.name)} – ${hasPrice(s.price) ? money(s.price) : "price quoted"}</option>`)
+            .map((s, i) => (s.sold ? "" : `<option value="${i}">${esc(s.name)} – ${hasPrice(s.price) ? money(s.price) : "price quoted"}</option>`))
             .join("");
         sizeWrap.hidden = false;
         sizeSel.required = true;
