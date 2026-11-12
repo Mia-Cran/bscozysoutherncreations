@@ -6,6 +6,21 @@
    Order emails to B stay in English: only what the visitor SEES changes. */
 (() => {
   const ES = {
+    // ---- baked goods page
+    "Baked goods": "Horneados",
+    "Homemade, fresh from the oven.": "Hecho en casa, recién salido del horno.",
+    "Bread and muffins baked from scratch in Middle Georgia.": "Pan y muffins horneados desde cero en el centro de Georgia.",
+    "See the baked goods": "Ver los horneados",
+    "Ask about an order": "Preguntar por un pedido",
+    "Bread": "Pan",
+    "Homemade loaves, baked fresh.": "Panes caseros, recién horneados.",
+    "Ask about bread": "Preguntar por el pan",
+    "Muffins": "Muffins",
+    "Soft, homemade muffins, baked fresh.": "Muffins caseros y suaves, recién horneados.",
+    "Ask about muffins": "Preguntar por los muffins",
+    "Let’s bake something": "Horneemos algo",
+    "Want bread or muffins? Send a note with what you’d like and when you need it.": "¿Quieres pan o muffins? Envíanos una nota con lo que te gustaría y para cuándo lo necesitas.",
+    "Bread, muffins, how many…": "Pan, muffins, cuántos…",
     // ---- category pages
     "Blankets & throws": "Mantas y cobijas",
     "Couch-ready chenille, 40 x 60.": "Chenilla lista para el sofá, 40 x 60.",

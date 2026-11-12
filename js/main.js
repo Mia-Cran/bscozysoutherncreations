@@ -140,6 +140,7 @@
                 <p${textAttr}>${escapeHtml(product.text)}</p>
                 <p class="price"${price ? "" : " hidden"}>${escapeHtml(price)}</p>
                 <p class="size"${size ? "" : " hidden"}>${escapeHtml(size)}</p>
+                ${isResin ? `<p class="coming-soon-tag" data-i18n="ui.comingSoon">Coming soon</p>` : ""}
                 <div class="product-actions">
                   <a class="btn btn-primary" data-buy="${escapeHtml(product.id)}" href="${escapeHtml(buyHref)}"${isExternal ? ` target="_blank" rel="noopener noreferrer"` : ""}${buyI18n}>${escapeHtml(buyLabel)}</a>
                 </div>

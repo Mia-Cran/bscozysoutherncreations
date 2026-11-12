@@ -1300,3 +1300,63 @@ a {
 @media (max-width: 700px) { .category-custom { grid-template-columns: 1fr; text-align: center; } }
 .footer-links { margin: 0.25rem 0; font-size: 0.95rem; font-family: inherit; }
 .footer-links a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Coming soon (resin) */
+.coming-soon-banner {
+  display: inline-block;
+  margin: 0 0 1.1rem;
+  padding: 0.55rem 1.6rem;
+  border-radius: 999px;
+  background: var(--rose);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 18px rgba(201, 123, 138, 0.3);
+}
+.coming-soon-tag,
+.product figcaption .coming-soon-tag {
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  padding: 0.2rem 0.85rem;
+  border-radius: 999px;
+  background: var(--rose);
+  color: #fff !important;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Baked goods */
+.baked-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+.baked-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+}
+.baked-card .baked-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  background: var(--paper-deep);
+}
+.baked-card .baked-art svg { width: 46%; height: auto; }
+.baked-card .baked-body { padding: 1.25rem 1.25rem 1.5rem; }
+.baked-card h2 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-style: italic;
+}
+.baked-card p { margin: 0 0 1rem; color: var(--ink-soft); }
